@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="#fff3e7"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageAngelLira"
+        android:layout_width="279dp"
+        android:layout_height="281dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/peregrino_logo" />
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextCPF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="CPF"
+        android:layout_marginHorizontal="42dp"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:boxStrokeColor="#8D8D8D"
+        app:cursorColor="#8D8D8D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageAngelLira">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/labelTextCPF"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:maxLength="14"
+            android:inputType="number"
+            app:boxStrokeColor="#8D8D8D" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextPass"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:layout_marginHorizontal="42dp"
+        android:hint="Senha"
+        android:minHeight="48dp"
+        app:boxStrokeColor="#8D8D8D"
+        app:cursorColor="#8D8D8D"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:drawableEnd="@drawable/eye"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextCPF">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/labelTextPass"
+            android:layout_width="match_parent"
+            android:layout_height="67dp"
+            android:inputType="textPassword"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textErrorPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="79dp"
+        android:text="Texto de Erro"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@+id/editTextPass"
+        app:layout_constraintTop_toTopOf="@+id/editTextPass"
+        android:layout_marginHorizontal="42dp"
+        android:visibility="gone"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonEntrar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Entrar"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:background="@drawable/stylebuttonblack"
+        android:layout_marginTop="156dp"
+        android:layout_marginHorizontal="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textErrorPass" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Cadastrar-se"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="35dp"
+        android:textColor="@color/black"
+        android:background="@drawable/stylebuttonoutline"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonEntrar" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonEsqueceuSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="287dp"
+        android:background="@android:color/transparent"
+        android:text="Esqueci minha senha"
+        android:textAllCaps="false"
+        android:textColor="#183d72"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textErrorCPF"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

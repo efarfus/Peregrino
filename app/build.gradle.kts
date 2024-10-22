@@ -7,6 +7,7 @@ android {
     namespace = "com.angellira.copiloto"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.angellira.copiloto"
         minSdk = 24
@@ -32,6 +33,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    viewBinding {
+        enable = true
     }
 }
 
