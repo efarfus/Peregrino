@@ -1,11 +1,11 @@
-package com.angellira.copiloto
+package com.angellira.peregrino
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.angellira.copiloto.databinding.ActivityMainBinding
+import com.angellira.peregrino.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 

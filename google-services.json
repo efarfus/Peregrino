@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "470976234205",
+    "project_id": "peregrino-abfa1",
+    "storage_bucket": "peregrino-abfa1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470976234205:android:b8a9828947c8cb94f2d134",
+        "android_client_info": {
+          "package_name": "com.angellira.peregrino"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEusOLQY4-nrYxpKpFk8fvu3zp-bLIr4s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

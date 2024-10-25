@@ -1,4 +1,4 @@
-package com.angellira.copiloto
+package com.angellira.peregrino
 
 import org.junit.Test
 

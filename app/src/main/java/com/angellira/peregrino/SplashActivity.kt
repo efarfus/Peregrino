@@ -1,4 +1,4 @@
-package com.angellira.copiloto
+package com.angellira.peregrino
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.angellira.copiloto.databinding.ActivityMainBinding
-import com.angellira.copiloto.databinding.ActivitySplashBinding
+import com.angellira.peregrino.databinding.ActivitySplashBinding
 import com.angellira.reservafrotas.preferences.Preferences
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
