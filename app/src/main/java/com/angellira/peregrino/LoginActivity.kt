@@ -15,6 +15,7 @@ import com.angellira.peregrino.model.User
 import com.angellira.peregrino.network.ApiServicePeregrino
 import com.angellira.peregrino.databinding.ActivityLoginBinding
 import com.angellira.reservafrotas.preferences.Preferences
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -32,6 +33,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupView()
         val main = Intent(this, MainActivity::class.java)
+
+
+
 //      val cadastro = Intent(this, CadastroActivity::class.java)
         binding.buttonCadastrar.setOnClickListener {
 //            startActivity(cadastro)

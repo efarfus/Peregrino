@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 
-private const val BASE_URL = "http://192.168.115.151:8080/"
+private const val BASE_URL = "https://peregrino-abfa1-default-rtdb.firebaseio.com/"
 
 
 private val retrofit = Retrofit.Builder()

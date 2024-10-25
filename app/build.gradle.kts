@@ -53,6 +53,10 @@ dependencies {
     implementation (libs.kotlinx.coroutines.android)
     implementation(libs.okhttp)
 
+    implementation (platform(libs.firebase.bom.v3200)) // Use a versão mais recente
+    implementation (libs.firebase.database.ktx) // Para Realtime Database
+    implementation (libs.firebase.firestore.ktx) // Para Cloud Firestore
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
