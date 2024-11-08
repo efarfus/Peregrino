@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1056709089619",
+    "firebase_url": "https://faceblog-2f28f-default-rtdb.firebaseio.com",
+    "project_id": "faceblog-2f28f",
+    "storage_bucket": "faceblog-2f28f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056709089619:android:9ce9595b5e700c984629a6",
+        "android_client_info": {
+          "package_name": "com.angellira.peregrino"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0o-GmgZJTZB8vqjXOGE0MQoMWZOMdA4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
