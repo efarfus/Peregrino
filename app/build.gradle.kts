@@ -6,17 +6,16 @@ plugins {
 }
 
 android {
-    namespace = "com.angellira.copiloto"
+    namespace = "com.angellira.peregrino"
     compileSdk = 34
 
 
     defaultConfig {
-        applicationId = "com.angellira.copiloto"
+        applicationId = "com.angellira.peregrino"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

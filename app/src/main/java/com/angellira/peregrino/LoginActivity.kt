@@ -1,4 +1,4 @@
-package com.angellira.copiloto
+package com.angellira.peregrino
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.angellira.copiloto.databinding.ActivityLoginBinding
-import com.angellira.copiloto.databinding.ActivityMainBinding
+import com.angellira.peregrino.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
@@ -18,6 +17,9 @@ class LoginActivity : AppCompatActivity() {
         setupView()
         binding.buttonEntrar.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+        }
+        binding.buttonCadastrar.setOnClickListener{
+            startActivity(Intent(this, CadastroActivity::class.java))
         }
     }
 

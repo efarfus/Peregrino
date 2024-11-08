@@ -1,6 +1,7 @@
 package com.angellira.reservafrotas
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,8 +12,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.angellira.copiloto.R
-import com.angellira.copiloto.databinding.ActivityCadastroBinding
+import com.angellira.peregrino.LoginActivity
+import com.angellira.peregrino.R
+import com.angellira.peregrino.databinding.ActivityCadastroBinding
 
 class CadastroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCadastroBinding
@@ -22,6 +24,10 @@ class CadastroActivity : AppCompatActivity() {
         setupView()
         maskCpf()
         clickSingInButton()
+
+        binding.buttonVolta.setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
 
