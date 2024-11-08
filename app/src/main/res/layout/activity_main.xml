@@ -58,15 +58,15 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar_home" />
 
     <Button
-        android:id="@+id/button_agendamentos"
+        android:id="@+id/button_corridas"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         android:paddingVertical="20dp"
-        android:text="Sobrepor Aplicativo"
-        android:textAlignment="textStart"
+        android:text="Corridas"
+        android:textAlignment="center"
         android:textColor="#183d72"
         android:textSize="22sp"
         app:cornerRadius="6dp"
@@ -76,7 +76,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button_controle_de_viagem"
+        android:id="@+id/button_relatorios"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,13 +84,49 @@
         android:layout_marginTop="24dp"
         android:paddingVertical="20dp"
         android:text="Relatórios"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="#183d72"
         android:textSize="22sp"
         app:cornerRadius="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_agendamentos"
+        app:layout_constraintTop_toBottomOf="@+id/button_corridas"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_calendario"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="24dp"
+        android:paddingVertical="20dp"
+        android:text="Calendário"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="22sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_relatorios"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_veiculos"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="24dp"
+        android:paddingVertical="20dp"
+        android:text="Veículos"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="22sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_calendario"
         tools:ignore="MissingConstraints" />
 
 
