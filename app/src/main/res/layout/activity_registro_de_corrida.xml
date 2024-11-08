@@ -39,7 +39,6 @@
             android:textSize="20sp" />
 
 
-
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
@@ -47,7 +46,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="64dp"
         android:orientation="vertical"
-        app:layout_constraintStart_toEndOf=""
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <Button
