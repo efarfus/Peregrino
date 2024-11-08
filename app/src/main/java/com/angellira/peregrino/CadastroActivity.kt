@@ -1,4 +1,4 @@
-package com.angellira.reservafrotas
+package com.angellira.peregrino
 
 import android.annotation.SuppressLint
 import android.content.Intent

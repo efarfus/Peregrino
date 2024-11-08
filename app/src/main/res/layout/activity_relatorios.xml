@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff3e7"
     tools:context=".RelatoriosActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -36,15 +37,45 @@
             android:text="Relatórios"
             android:textColor="#183d72"
             android:textSize="20sp" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="64dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf=""
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:text="CORRIDAS"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:backgroundTint="#183d72"
+            android:text="Enviar"
+            android:textColor="@color/white" />
 
-
+        <Button
+            android:id="@+id/buttonCalendario"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:backgroundTint="#183d72"
+            android:text="Calendario"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

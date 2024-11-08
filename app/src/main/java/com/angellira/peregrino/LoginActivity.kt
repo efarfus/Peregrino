@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
         val main = Intent(this, MainActivity::class.java)
 //      val cadastro = Intent(this, CadastroActivity::class.java)
         binding.buttonCadastrar.setOnClickListener {
-//            startActivity(cadastro)
+            startActivity(Intent(this, CadastroActivity::class.java))
         }
 
         binding.buttonEntrar.setOnClickListener {

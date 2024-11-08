@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="#fff3e7"
+    android:background="#fff3e7"
     tools:context=".CadastroActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:backgroundTint="#fff3e7"
         android:background="#fff3e7"
+        android:backgroundTint="#fff3e7"
         android:elevation="4dp"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,8 +26,7 @@
             android:id="@+id/buttonVolta"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/baseline_arrow_back_24"
-            />
+            android:background="@drawable/baseline_arrow_back_24" />
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -43,7 +43,6 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
@@ -51,26 +50,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:backgroundTint="#fff3e7"
             android:background="#fff3e7"
+            android:backgroundTint="#fff3e7"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="25dp"
-                android:layout_marginRight="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:ems="10"
                 android:hint="Nome"
                 android:inputType="text"
                 android:minHeight="48dp"
-                app:boxBackgroundMode="outline"
-                app:boxStrokeColor="#000000"
                 app:boxBackgroundColor="#fff3e7"
-                >
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameInput"
@@ -79,8 +76,7 @@
                     android:layout_height="67dp"
                     android:inputType="textPersonName"
                     android:maxLength="50"
-                    android:textColor="@color/black"
-                    />
+                    android:textColor="@color/black" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,7 +84,7 @@
                 android:id="@+id/errorName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_gravity="center"
                 android:text="Erro"
                 android:textColor="#cc0000"
                 android:visibility="gone" />
@@ -97,16 +93,15 @@
                 android:id="@+id/cpfText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:ems="10"
                 android:hint="CPF"
                 android:inputType="text"
                 android:minHeight="48dp"
+                app:boxBackgroundColor="#fff3e7"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeColor="#000000"
-                app:boxBackgroundColor="#fff3e7">
+                app:boxStrokeColor="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/cpfInput"
@@ -132,25 +127,24 @@
                 android:id="@+id/emailText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:ems="10"
                 android:hint="Email"
                 android:inputType="text"
                 android:minHeight="48dp"
+                app:boxBackgroundColor="#fff3e7"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeColor="#000000"
-                app:boxBackgroundColor="#fff3e7">
+                app:boxStrokeColor="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailInput"
-                    android:inputType="textEmailAddress"
                     android:layout_width="match_parent"
-                    app:boxStrokeColor="#8D8D8D"
-                    android:textColor="@color/black"
+                    android:layout_height="67dp"
+                    android:inputType="textEmailAddress"
                     android:maxLength="50"
-                    android:layout_height="67dp" />
+                    android:textColor="@color/black"
+                    app:boxStrokeColor="#8D8D8D" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -158,34 +152,32 @@
                 android:id="@+id/errorEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_gravity="center"
                 android:text="Erro"
                 android:textColor="#cc0000"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:ems="10"
                 android:hint="Senha"
                 android:minHeight="48dp"
+                app:boxBackgroundColor="#fff3e7"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeColor="#000000"
-                app:boxBackgroundColor="#fff3e7">
+                app:boxStrokeColor="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordInput"
                     android:layout_width="match_parent"
                     android:layout_height="67dp"
-                    app:boxStrokeColor="#8D8D8D"
+                    android:inputType="textPassword"
                     android:maxLength="35"
                     android:textColor="@color/black"
-                    android:inputType="textPassword"
-                    />
+                    app:boxStrokeColor="#8D8D8D" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -193,33 +185,32 @@
                 android:id="@+id/errorPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_gravity="center"
                 android:text="Erro"
                 android:textColor="#cc0000"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordConfirmationText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:ems="10"
                 android:hint="Confirmar senha"
                 android:minHeight="48dp"
+                app:boxBackgroundColor="#fff3e7"
                 app:boxBackgroundMode="outline"
-                app:boxStrokeColor="#000000"
-                app:boxBackgroundColor="#fff3e7">
+                app:boxStrokeColor="#000000">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordConfirmationInput"
                     android:layout_width="match_parent"
-                    app:boxStrokeColor="#8D8D8D"
+                    android:layout_height="67dp"
                     android:inputType="textPassword"
                     android:maxLength="35"
                     android:textColor="@color/black"
-                    android:layout_height="67dp" />
+                    app:boxStrokeColor="#8D8D8D" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -227,29 +218,28 @@
                 android:id="@+id/errorConfirmPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
+                android:layout_gravity="center"
                 android:text="Erro"
                 android:textColor="#cc0000"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="40dp"
-                android:textColor="@color/white"
-                android:layout_marginRight="30dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:backgroundTint="#183d72"
-                android:text="Enviar" />
+                android:text="Enviar"
+                android:textColor="@color/white" />
 
 
             <ImageView
                 android:id="@+id/logopreta"
                 android:layout_width="300dp"
                 android:layout_height="150dp"
-                android:layout_marginTop="15dp"
                 android:layout_gravity="center"
+                android:layout_margin="20dp"
                 android:background="@drawable/peregrino_logo" />
 
         </LinearLayout>
