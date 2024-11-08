@@ -13,4 +13,11 @@ class Preferences(context: Context) {
         set(value) {
             sharedPreferences.edit().putBoolean("isLogged", value).apply()
         }
+
+    var id: String?
+        get() = sharedPreferences.getString("id", null)
+        set(value) {
+            sharedPreferences.edit().putString("id", value).apply()
+        }
+
 }
