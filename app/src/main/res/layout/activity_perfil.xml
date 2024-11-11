@@ -56,7 +56,6 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_home"
         app:layout_constraintVertical_bias="0.0">
@@ -73,40 +72,119 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_home" />
 
-        <TextView
-            android:id="@+id/nomeText"
-            style="?attr/materialButtonOutlinedStyle"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="TextView" />
 
-        <TextView
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="text"
+            android:minHeight="48dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#000000"
+            app:boxBackgroundColor="#fff3e7"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nameInput"
+                style="@style/Theme.Design.NoActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:inputType="textPersonName"
+                android:enabled="false"
+                android:maxLength="50"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailText"
             android:layout_width="match_parent"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/cpfText"
             android:layout_margin="10dp"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_gravity="center"
+
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="text"
+            android:minHeight="48dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#000000"
+            app:boxBackgroundColor="#fff3e7"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailInput"
+                style="@style/Theme.Design.NoActionBar"
+                android:enabled="false"
+
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/cpfText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_margin="10dp"
 
-        <TextView
+            android:ems="10"
+            android:hint="CPF"
+            android:inputType="text"
+            android:minHeight="48dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#000000"
+            app:boxBackgroundColor="#fff3e7"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cpfInput"
+                style="@style/Theme.Design.NoActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:enabled="false"
+
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/senhaText"
             android:layout_width="match_parent"
-            android:layout_margin="10dp"
-            android:layout_gravity="center"
-            style="?attr/materialButtonOutlinedStyle"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_margin="10dp"
+
+            android:ems="10"
+            android:hint="Senha"
+            android:inputType="text"
+            android:minHeight="48dp"
+            app:boxBackgroundMode="outline"
+            app:boxStrokeColor="#000000"
+            app:boxBackgroundColor="#fff3e7"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/senhaInput"
+                style="@style/Theme.Design.NoActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="67dp"
+                android:inputType="textPersonName"
+                android:maxLength="50"
+                android:enabled="false"
+                android:textColor="@color/black"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/button_logout"

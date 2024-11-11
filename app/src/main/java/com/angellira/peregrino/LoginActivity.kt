@@ -38,8 +38,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.buttonEntrar.setOnClickListener {
-            logar(binding.buttonEntrar, binding.labelTextCPF, binding.labelTextPass, main)
             startActivity(main)
+            logar(binding.buttonEntrar, binding.labelTextCPF, binding.labelTextPass, main)
         }
     }
 
