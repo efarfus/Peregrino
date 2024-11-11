@@ -9,10 +9,9 @@
     tools:context=".RelatoriosActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_home"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:backgroundTint="#fff3e7"
         android:background="#fff3e7"
         android:elevation="4dp"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar"
@@ -25,8 +24,7 @@
             android:id="@+id/buttonVolta"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@drawable/baseline_arrow_back_24"
-            />
+            android:background="@drawable/baseline_arrow_back_24" />
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -44,42 +42,43 @@
             android:layout_height="25dp"
             android:layout_gravity="right"
             android:layout_margin="10dp"
-            android:background="@drawable/baseline_person_outline_24"
-            />
-
+            android:background="@drawable/baseline_person_outline_24" />
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/button_corridas"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="50dp"
+        android:paddingVertical="20dp"
+        android:text="Índice de lucro no mês"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="22sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_home"
+        tools:ignore="MissingConstraints" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="#183d72"
-            android:text="INDICE DE LUCRO NO MÊS"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/buttonCalendario"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:backgroundTint="#183d72"
-            android:text="GASTOS DO MÊS"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/button_relatorios"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="24dp"
+        android:paddingVertical="20dp"
+        android:text="Gastos do mês"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="22sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_corridas"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

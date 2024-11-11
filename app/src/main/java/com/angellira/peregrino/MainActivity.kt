@@ -19,6 +19,12 @@ class MainActivity : AppCompatActivity() {
         binding.buttonPerfil.setOnClickListener {
             startActivity(Intent(this, PerfilActivity::class.java))
         }
+        binding.buttonRelatorios.setOnClickListener {
+            startActivity(Intent(this, RelatoriosActivity::class.java))
+        }
+        binding.buttonVeiculos.setOnClickListener {
+            startActivity(Intent(this, VeiculosActivity::class.java))
+        }
 
     }
 
