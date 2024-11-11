@@ -59,6 +59,8 @@
         android:id="@+id/buttonGo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#183d72"
+
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
@@ -69,6 +71,8 @@
     <ImageView
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
+        android:backgroundTint="#183d72"
+
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toStartOf="@+id/imageView3"
@@ -93,8 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="GOL GTI 1998"
-        android:textFontWeight="@integer/material_motion_duration_long_2"
-        android:textSize="16sp"
+        android:textSize="24sp"
         android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@id/text_car_name"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,22 +105,34 @@
 
     <Button
         android:id="@+id/button_edit"
-        android:layout_width="wrap_content"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
         android:text="Editar"
-        android:backgroundTint="#183d72"
-        android:textColor="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/text_car_model"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="22sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/text_car_model" />
 
     <Button
         android:id="@+id/button_consumptions"
-        android:layout_width="wrap_content"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
         android:text="Consumos"
-        android:backgroundTint="#183d72"
-        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="22sp"
+        app:cornerRadius="6dp"
         app:layout_constraintTop_toBottomOf="@id/button_edit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
