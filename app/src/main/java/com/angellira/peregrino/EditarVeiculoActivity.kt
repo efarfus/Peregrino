@@ -1,5 +1,6 @@
 package com.angellira.peregrino
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,10 @@ class EditarVeiculoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
+
+        binding.buttonPneus.setOnClickListener {
+            startActivity(Intent(this, PneusActivity::class.java))
+        }
     }
 
     private fun setupView() {
