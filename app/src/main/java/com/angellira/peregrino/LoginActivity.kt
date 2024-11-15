@@ -33,9 +33,9 @@ class LoginActivity : AppCompatActivity() {
         setupView()
         val main = Intent(this, MainActivity::class.java)
 
-//      val cadastro = Intent(this, CadastroActivity::class.java)
+        val cadastro = Intent(this, CadastroActivity::class.java)
         binding.buttonCadastrar.setOnClickListener {
-//            startActivity(cadastro)
+            startActivity(cadastro)
         }
 
         binding.buttonEntrar.setOnClickListener {
@@ -84,10 +84,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(pagMain)
                         clear(caixaEmail, caixaSenha)
                     }
-                }
-
-
-                else {
+                } else {
                     withContext(Main) {
                         Toast.makeText(
                             this@LoginActivity,

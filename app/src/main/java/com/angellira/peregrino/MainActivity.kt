@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding.buttonVeiculos.setOnClickListener {
             startActivity(Intent(this, VeiculosActivity::class.java))
         }
-
     }
 
     private fun setupView() {
