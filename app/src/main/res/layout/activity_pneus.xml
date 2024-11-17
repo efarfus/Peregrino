@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="#fff3e7"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PneusActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_home"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#fff3e7"
+        android:elevation="4dp"
+        android:theme="@style/Theme.Material3.DayNight.NoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/background_dark">
+
+        <ImageView
+            android:id="@+id/buttonVolta"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/baseline_arrow_back_24" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:text="Pneus"
+            android:textColor="#183d72"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/buttonPerfil"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"
+            android:background="@drawable/baseline_person_outline_24" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/textObs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Selecione o lado do carro para escolher o respectivo pneu"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_home" />
+
+    <ImageView
+        android:id="@+id/picCarro"
+        android:layout_width="676dp"
+        android:layout_height="354dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textObs"
+        app:srcCompat="@drawable/carro_cima" />
+
+    <Button
+        android:id="@+id/button_pneu_dianteiro_esquerdo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FF6200EE"
+        android:text="E"
+        app:layout_constraintEnd_toStartOf="@id/picCarro"
+        app:layout_constraintTop_toTopOf="@id/picCarro"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <!-- Botão do pneu dianteiro direito -->
+    <Button
+        android:id="@+id/button_pneu_dianteiro_direito"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FF6200EE"
+        android:text="D"
+        app:layout_constraintStart_toEndOf="@id/picCarro"
+        app:layout_constraintTop_toTopOf="@id/picCarro"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <!-- Botão do pneu traseiro esquerdo -->
+    <Button
+        android:id="@+id/button_pneu_traseiro_esquerdo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FF6200EE"
+        android:text="E"
+        app:layout_constraintEnd_toStartOf="@id/picCarro"
+        app:layout_constraintBottom_toBottomOf="@id/picCarro"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <!-- Botão do pneu traseiro direito -->
+    <Button
+        android:id="@+id/button_pneu_traseiro_direito"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#FF6200EE"
+        android:text="D"
+        app:layout_constraintStart_toEndOf="@id/picCarro"
+        app:layout_constraintBottom_toBottomOf="@id/picCarro"
+        app:layout_constraintVertical_bias="0.7" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,13 +16,26 @@
         android:theme="@style/Theme.Copiloto"
         tools:targetApi="31">
         <activity
+            android:name=".ConsumoCombustivelActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".RelatoriosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistroDeCorridaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CadastroActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PneusActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditarVeiculoActivity"
             android:exported="false" />
         <activity
             android:name=".VeiculosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RelatoriosActivity"
             android:exported="false" />
         <activity
             android:name=".PerfilActivity"

@@ -1,0 +1,21 @@
+[33m4ef4336[m[33m ([m[1;36mHEAD -> [m[1;32mPerfil-Farfus[m[33m)[m alinhamento e merge
+[33m27eb7d5[m[33m ([m[1;31morigin/Perfil-Farfus[m[33m)[m alinhamento e merge
+[33me39c5eb[m Merge remote-tracking branch 'refs/remotes/origin/Cadastro-João' into Perfil-Farfus
+[33mf72338b[m[33m ([m[1;31morigin/Cadastro-João[m[33m)[m aaa
+[33maef6ca8[m Ajustado bindings de novas páginas
+[33m4b86c6d[m Adicionada página de veículos e relatórios
+[33me0f56f0[m Adicionada página de veículos e relatórios
+[33m55ead90[m Ajustes PerfilActivity
+[33md46dc1d[m Iniciado layout do PerfilActivity
+[33m85f06d8[m Arrumado erro
+[33md3403d7[m Página de registro de corrida
+[33mcd428b8[m Arrumado tela cadastro e relatórios
+[33m10689aa[m Merge remote-tracking branch 'refs/remotes/origin/Login-Farfus' into Cadastro-João
+[33m7f22691[m Salvando alterações
+[33m108ed6c[m Finalizado XML main
+[33m3d2c1ba[m Criado model, network, ajustado api para LoginActivity
+[33m357a6cc[m Criado model, network, ajustado api para LoginActivity
+[33m33ad448[m Adicionado firebase ao projeto.
+[33mb17460c[m Tela de cadastro e lógica feita
+[33m0143a9c[m XML de login, splash e main
+[33m65acc8b[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m Initial commit
