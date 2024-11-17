@@ -14,6 +14,10 @@ class ConsumoCombustivelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
+
+        binding.buttonVolta.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setupView() {

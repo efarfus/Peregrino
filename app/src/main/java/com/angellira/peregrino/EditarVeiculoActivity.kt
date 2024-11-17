@@ -20,6 +20,18 @@ class EditarVeiculoActivity : AppCompatActivity() {
         binding.buttonPneus.setOnClickListener {
             startActivity(Intent(this, PneusActivity::class.java))
         }
+
+        binding.buttonConsumo.setOnClickListener {
+            startActivity(Intent(this, ConsumoCombustivelActivity::class.java))
+        }
+
+        binding.buttonOcorrencias.setOnClickListener {
+            startActivity(Intent(this, OcorrenciasActivity::class.java))
+        }
+
+        binding.buttonVolta.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setupView() {

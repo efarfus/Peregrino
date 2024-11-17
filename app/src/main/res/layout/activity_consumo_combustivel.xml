@@ -45,4 +45,113 @@
             android:background="@drawable/baseline_person_outline_24" />
     </androidx.appcompat.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/textApelidoCarro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text='Meu golzinho'
+        android:textColor="#000000"
+        android:textSize="40sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_home" />
+
+    <TextView
+        android:id="@+id/textModeloCarro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GOL GTI 1998"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textApelidoCarro" />
+
+    <TextView
+        android:id="@+id/textGasto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seu veículo faz aproximadamente:"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textModeloCarro" />
+
+    <ImageView
+        android:id="@+id/velocimetro"
+        android:layout_width="wrap_content"
+        android:layout_height="236dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textGasto"
+        app:srcCompat="@drawable/velocimetro" />
+
+    <TextView
+        android:id="@+id/inputMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="10"
+        android:textColor="#000000"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/velocimetro" />
+
+    <Button
+        android:id="@+id/button_registrar"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:text="Registrar nova média de consumo"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="20sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/velocimetro"/>
+    <Button
+        android:id="@+id/button_calcular"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:text="Calcular média de consumo"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="22sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_registrar"/>
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:paddingVertical="10dp"
+        android:text="Histórico de consumo"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_calcular"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

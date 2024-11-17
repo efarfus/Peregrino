@@ -52,7 +52,7 @@
         android:gravity="center"
         android:text="Selecione o lado do carro para escolher o respectivo pneu"
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_home" />
@@ -109,6 +109,90 @@
         app:layout_constraintStart_toEndOf="@id/picCarro"
         app:layout_constraintBottom_toBottomOf="@id/picCarro"
         app:layout_constraintVertical_bias="0.7" />
+
+    <Button
+        android:id="@+id/button_registrar"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:text="Cadastro de pneus"
+        android:textAlignment="center"
+        android:textColor="#183d72"
+        android:textSize="20sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/picCarro"/>
+
+    <TextView
+        android:id="@+id/qualPneu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Roda tal de ${apelido}"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_registrar" />
+    <TextView
+        android:id="@+id/idPneu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ID: 1"
+        android:layout_marginTop="5dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/qualPneu" />
+
+    <TextView
+        android:id="@+id/fabricante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fabricante: Pirelli"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/idPneu" />
+
+    <TextView
+        android:id="@+id/aro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aro: 13"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fabricante" />
+
+    <TextView
+        android:id="@+id/ultimoEnchimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Último enchimento: 14/08/2024"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aro" />
+    <TextView
+        android:id="@+id/ultimaTroca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Última troca do pneu: 14/08/2024"
+        android:textColor="#000000"
+        android:layout_marginLeft="40dp"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ultimoEnchimento" />
+
 
 
 

@@ -1,5 +1,6 @@
 package com.angellira.peregrino
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.angellira.peregrino.databinding.ActivityPneusBinding
 class PneusActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPneusBinding
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
