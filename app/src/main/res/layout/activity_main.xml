@@ -16,7 +16,6 @@
         android:elevation="4dp"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/background_dark">

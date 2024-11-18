@@ -1,6 +1,7 @@
 package com.angellira.peregrino
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.Toast
@@ -16,14 +17,14 @@ class PneusActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        binding = ActivityPneusBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setupView()
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding.buttonPerfil.setOnClickListener {
+            startActivity(Intent(this, PerfilActivity::class.java))
+        }
+
+        binding.buttonVolta.setOnClickListener {
+            finish()
         }
 
         binding.picCarro.setOnTouchListener { v, event ->
@@ -56,6 +57,18 @@ class PneusActivity : AppCompatActivity() {
                 v.performClick()
             }
             true
+        }
+    }
+
+    private fun setupView() {
+        enableEdgeToEdge()
+        binding = ActivityPneusBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
     }
 

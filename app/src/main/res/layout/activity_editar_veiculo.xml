@@ -77,23 +77,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textModeloCarro"
         app:srcCompat="@drawable/carro" />
 
-    <Button
-        android:id="@+id/button_edit"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="8dp"
-        android:paddingVertical="20dp"
-        android:text="Editar marca/modelo"
-        android:textAlignment="center"
-        android:textColor="#183d72"
-        android:textSize="22sp"
-        app:cornerRadius="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/picCarro"
-        tools:ignore="MissingConstraints" />
+
 
     <Button
         android:id="@+id/button_ocorrencias"
@@ -110,7 +94,7 @@
         app:cornerRadius="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_edit"
+        app:layout_constraintTop_toBottomOf="@+id/picCarro"
         tools:ignore="MissingConstraints" />
 
     <Button

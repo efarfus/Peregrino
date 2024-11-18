@@ -17,6 +17,10 @@ class EditarVeiculoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupView()
 
+        binding.buttonPerfil.setOnClickListener {
+            startActivity(Intent(this, PerfilActivity::class.java))
+        }
+
         binding.buttonPneus.setOnClickListener {
             startActivity(Intent(this, PneusActivity::class.java))
         }

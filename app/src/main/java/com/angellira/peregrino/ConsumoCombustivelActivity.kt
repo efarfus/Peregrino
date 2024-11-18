@@ -1,5 +1,6 @@
 package com.angellira.peregrino
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +15,10 @@ class ConsumoCombustivelActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
+
+        binding.buttonPerfil.setOnClickListener {
+            startActivity(Intent(this, PerfilActivity::class.java))
+        }
 
         binding.buttonVolta.setOnClickListener {
             finish()

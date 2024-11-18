@@ -17,7 +17,6 @@
         android:elevation="4dp"
         android:theme="@style/Theme.Material3.DayNight.NoActionBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@android:color/background_dark">
@@ -52,21 +51,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        style="?attr/materialButtonOutlinedStyle"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_home"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_home">
 
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="115dp"
+            android:layout_width="104dp"
+            android:layout_height="90dp"
             android:layout_margin="20dp"
             android:layout_gravity="center"
-            android:layout_height="116dp"
             android:src="@drawable/imagevazia"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +88,7 @@
                 android:id="@+id/nameInput"
                 style="@style/Theme.Design.NoActionBar"
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="56dp"
                 android:inputType="textPersonName"
                 android:enabled="false"
                 android:maxLength="50"
@@ -121,7 +118,7 @@
                 android:enabled="false"
 
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="56dp"
                 android:inputType="textPersonName"
                 android:maxLength="50"
                 android:textColor="@color/black"
@@ -148,7 +145,7 @@
                 android:id="@+id/cpfInput"
                 style="@style/Theme.Design.NoActionBar"
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="56dp"
                 android:enabled="false"
 
                 android:inputType="textPersonName"
@@ -177,7 +174,7 @@
                 android:id="@+id/senhaInput"
                 style="@style/Theme.Design.NoActionBar"
                 android:layout_width="match_parent"
-                android:layout_height="67dp"
+                android:layout_height="56dp"
                 android:inputType="textPersonName"
                 android:maxLength="50"
                 android:enabled="false"
@@ -206,7 +203,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
             android:backgroundTint="@android:color/holo_red_dark"
             android:paddingVertical="10dp"
             android:text="Delete"

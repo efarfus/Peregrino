@@ -1,5 +1,6 @@
 package com.angellira.peregrino
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,10 @@ class OcorrenciasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setupView()
         recyclerView()
+
+        binding.buttonPerfil.setOnClickListener {
+            startActivity(Intent(this, PerfilActivity::class.java))
+        }
 
         binding.buttonVolta.setOnClickListener {
             finish()

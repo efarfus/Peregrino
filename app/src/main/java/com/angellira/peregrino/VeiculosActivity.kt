@@ -2,12 +2,18 @@ package com.angellira.peregrino
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.angellira.peregrino.adapter.CarAdapter
 import com.angellira.peregrino.databinding.ActivityMainBinding
 import com.angellira.peregrino.databinding.ActivityVeiculosBinding
+import com.angellira.peregrino.model.Car
 
 class VeiculosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityVeiculosBinding
@@ -15,6 +21,64 @@ class VeiculosActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
+
+        binding.buttonPerfil.setOnClickListener {
+            startActivity(Intent(this, PerfilActivity::class.java))
+        }
+
+        val cars = listOf(
+            Car( "Foguetinho", "Gol GTI 1998"),
+            Car( "Trovão Azul", "Uno Mille 2005"),
+            Car( "Relâmpago", "Civic 2010")
+        )
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewCars)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = CarAdapter(cars) { selectedCar ->
+            Toast.makeText(this, "Selecionado: ${selectedCar.nickname} - ${selectedCar.model}", Toast.LENGTH_SHORT).show()
+        }
+        val snapHelper = PagerSnapHelper() // Alinha um item de cada vez
+        snapHelper.attachToRecyclerView(recyclerView)
+
+        var currentPosition = 0
+
+// Listener para monitorar o item selecionado
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) { // Parado após rolagem
+                    val view = snapHelper.findSnapView(layoutManager)
+                    view?.let {
+                        currentPosition = layoutManager.getPosition(it)
+                        val currentCar = cars[currentPosition]
+                        Toast.makeText(
+                            recyclerView.context,
+                            "Atual: ${currentCar.nickname} - ${currentCar.model}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        })
+
+        val buttonVerify = binding.buttonEdit
+        buttonVerify.setOnClickListener {
+            val selectedCar = cars[currentPosition]
+            Toast.makeText(
+                this,
+                "Entrando no veículo: ${selectedCar.nickname} - ${selectedCar.model}",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            // Aqui você pode abrir uma nova Activity ou realizar uma ação específica
+            val intent = Intent(this, EditarVeiculoActivity::class.java)
+            intent.putExtra("CAR_NICKNAME", selectedCar.nickname)
+            intent.putExtra("CAR_MODEL", selectedCar.model)
+            startActivity(intent)
+        }
+
+
 
         binding.buttonVolta.setOnClickListener {
             finish()
