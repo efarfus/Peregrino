@@ -1,6 +1,7 @@
 package com.angellira.peregrino
 
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.angellira.peregrino.adapter.CarAdapter
-import com.angellira.peregrino.databinding.ActivityMainBinding
 import com.angellira.peregrino.databinding.ActivityVeiculosBinding
 import com.angellira.peregrino.model.Car
 
@@ -27,9 +27,9 @@ class VeiculosActivity : AppCompatActivity() {
         }
 
         val cars = listOf(
-            Car( "Foguetinho", "Gol GTI 1998"),
-            Car( "Trovão Azul", "Uno Mille 2005"),
-            Car( "Relâmpago", "Civic 2010")
+            Car("Foguetinho", "Gol GTI 1998"),
+            Car("Trovão Azul", "Uno Mille 2005"),
+            Car("Relâmpago", "Civic 2010")
         )
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewCars)
@@ -41,9 +41,42 @@ class VeiculosActivity : AppCompatActivity() {
         val snapHelper = PagerSnapHelper() // Alinha um item de cada vez
         snapHelper.attachToRecyclerView(recyclerView)
 
+        val activeColor = resources.getColor(R.color.indicator_active_color, theme) // Cor ativa
+        val inactiveColor = resources.getColor(R.color.indicator_inactive_color, theme) // Cor inativa
+
+        // Drawable para o indicador ativo
+        val activeDrawable = GradientDrawable().apply {
+            shape = GradientDrawable.OVAL
+            setColor(activeColor) // Cor ativa
+            setSize(20, 20) // Tamanho maior para ativo
+        }
+
+        // Drawable para o indicador inativo
+        val inactiveDrawable = GradientDrawable().apply {
+            shape = GradientDrawable.OVAL
+            setColor(inactiveColor) // Cor inativa
+            setSize(12, 12) // Tamanho menor para inativo
+        }
+
+        // Cria o indicador com base na quantidade de carros
+        binding.indicator.createIndicators(cars.size, 0)
+
+        // Adiciona o listener para sincronizar o indicador com o RecyclerView
+        binding.recyclerViewCars.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    val view = snapHelper.findSnapView(layoutManager)
+                    val position = layoutManager.getPosition(view!!)
+                    binding.indicator.animatePageSelected(position) // Atualiza a animação
+                }
+            }
+        })
+
         var currentPosition = 0
 
-// Listener para monitorar o item selecionado
+        // Listener para monitorar o item selecionado
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -77,8 +110,6 @@ class VeiculosActivity : AppCompatActivity() {
             intent.putExtra("CAR_MODEL", selectedCar.model)
             startActivity(intent)
         }
-
-
 
         binding.buttonVolta.setOnClickListener {
             finish()

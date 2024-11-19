@@ -103,8 +103,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/velocimetro" />
 
+
     <Button
-        android:id="@+id/button_registrar"
+        android:id="@+id/button_calcular"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_margin="20dp"
@@ -114,27 +115,11 @@
         android:text="Registrar nova média de consumo"
         android:textAlignment="center"
         android:textColor="#183d72"
-        android:textSize="20sp"
-        app:cornerRadius="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/velocimetro"/>
-    <Button
-        android:id="@+id/button_calcular"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="match_parent"
-        android:layout_margin="20dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:text="Calcular média de consumo"
-        android:textAlignment="center"
-        android:textColor="#183d72"
         android:textSize="22sp"
         app:cornerRadius="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_registrar"/>
+        app:layout_constraintTop_toBottomOf="@+id/velocimetro"/>
 
     <Button
         android:id="@+id/button_delete"

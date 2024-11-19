@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.angellira.peregrino.databinding.ActivityBottomSheetBinding
 import com.angellira.peregrino.databinding.ActivityPneusBinding
 
 class PneusActivity : AppCompatActivity() {
@@ -25,6 +26,13 @@ class PneusActivity : AppCompatActivity() {
 
         binding.buttonVolta.setOnClickListener {
             finish()
+        }
+
+        binding.buttonRegistrar.setOnClickListener {
+            val editProfileDialog = EditProfileDialogFragment()
+
+            // Exiba o DialogFragment
+            editProfileDialog.show(supportFragmentManager, "EditProfileDialog")
         }
 
         binding.picCarro.setOnTouchListener { v, event ->

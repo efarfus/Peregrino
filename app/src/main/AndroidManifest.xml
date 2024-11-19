@@ -16,6 +16,24 @@
         android:theme="@style/Theme.Copiloto"
         tools:targetApi="31">
         <activity
+            android:name=".CalculoResultadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CalculoPasso4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".CalculoPasso3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".CalculoPasso2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".calculoPasso1"
+            android:exported="false" />
+        <activity
+            android:name=".BottomSheet"
+            android:exported="false" />
+        <activity
             android:name=".OcorrenciasActivity"
             android:exported="false" />
         <activity

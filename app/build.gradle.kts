@@ -49,10 +49,12 @@ dependencies {
     implementation (libs.retrofit2.kotlinx.serialization.converter) // Conversor para kotlinx.serialization
     implementation (libs.kotlinx.serialization.json) // Biblioteca para kotlinx.serialization
     //noinspection GradleDependency
+    implementation ("me.relex:circleindicator:2.1.6")
+
     implementation (libs.kotlinx.coroutines.core)
     implementation (libs.kotlinx.coroutines.android)
     implementation(libs.okhttp)
-
+    implementation (libs.me.circleindicator)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

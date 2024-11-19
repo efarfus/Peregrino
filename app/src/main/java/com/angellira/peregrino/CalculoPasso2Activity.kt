@@ -6,32 +6,25 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.angellira.peregrino.databinding.ActivityConsumoCombustivelBinding
-import com.angellira.peregrino.databinding.ActivityLoginBinding
+import com.angellira.peregrino.databinding.ActivityCalculoPasso1Binding
+import com.angellira.peregrino.databinding.ActivityCalculoPasso2Binding
 
-class ConsumoCombustivelActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityConsumoCombustivelBinding
+class CalculoPasso2Activity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityCalculoPasso2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
 
-        binding.buttonPerfil.setOnClickListener {
-            startActivity(Intent(this, PerfilActivity::class.java))
-        }
-
-        binding.buttonCalcular.setOnClickListener {
-            startActivity(Intent(this, calculoPasso1::class.java))
-        }
-
-        binding.buttonVolta.setOnClickListener {
-            finish()
+        binding.buttonRegistrar.setOnClickListener {
+            startActivity(Intent(this, CalculoPasso3Activity::class.java))
         }
     }
 
     private fun setupView() {
         enableEdgeToEdge()
-        binding = ActivityConsumoCombustivelBinding.inflate(layoutInflater)
+        binding = ActivityCalculoPasso2Binding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

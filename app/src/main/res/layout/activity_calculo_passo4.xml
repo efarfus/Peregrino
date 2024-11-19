@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#183d72"
+    tools:context=".CalculoPasso4Activity">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="60dp"
+        android:layout_marginLeft="60dp"
+        android:gravity="center"
+        android:text="Passo 4: Insira a quantidade de litros que sobrou no seu tanque"
+        android:layout_marginTop="240dp"
+        android:textSize="30sp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:ems="10"
+        android:hint="Litros sobrados"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:boxBackgroundColor="#183d72"
+        android:textColorHint="@color/white"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameInput"
+            style="@style/Theme.Design.NoActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:inputType="textPersonName"
+            android:maxLength="50"
+            android:textColor="@color/white" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <Button
+        android:id="@+id/button_registrar"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:text="Prosseguir"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FFA500"
+        android:textSize="20sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameText"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
