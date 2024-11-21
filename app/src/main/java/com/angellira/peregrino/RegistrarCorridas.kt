@@ -8,22 +8,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.angellira.peregrino.databinding.ActivityMainBinding
 import com.angellira.peregrino.databinding.ActivityRegistrarCorridasBinding
-import com.angellira.peregrino.databinding.ActivityRegistroDeCorridaBinding
 
-class RegistroDeCorridaActivity : AppCompatActivity() {
+class RegistrarCorridas : AppCompatActivity() {
 
-    private lateinit var binding: ActivityRegistroDeCorridaBinding
+    private lateinit var binding: ActivityRegistrarCorridasBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setupView()
         binding.buttonVolta.setOnClickListener{
-            startActivity(Intent(this@RegistroDeCorridaActivity, MainActivity::class.java))
-        }
-        binding.buttonCorridas.setOnClickListener{
-            startActivity(Intent(this@RegistroDeCorridaActivity, RegistrarCorridas::class.java))
-        }
-        binding.buttonRelatorios.setOnClickListener{
-            startActivity(Intent(this@RegistroDeCorridaActivity, RelatoriosActivity::class.java))
+            startActivity(Intent(this, RegistroDeCorridaActivity::class.java))
         }
     }
 
@@ -31,7 +26,7 @@ class RegistroDeCorridaActivity : AppCompatActivity() {
 
     private fun setupView() {
         enableEdgeToEdge()
-        binding = ActivityRegistroDeCorridaBinding.inflate(layoutInflater)
+        binding = ActivityRegistrarCorridasBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

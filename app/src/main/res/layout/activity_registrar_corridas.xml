@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrarCorridas"
+    android:backgroundTint="@color/ic_launcher_background"
+    android:background="@color/ic_launcher_background">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:backgroundTint="#fff3e7"
+        android:background="#fff3e7"
+        android:elevation="4dp"
+        android:theme="@style/Theme.Material3.DayNight.NoActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/background_dark">
+
+        <ImageView
+            android:id="@+id/buttonVolta"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/baseline_arrow_back_24"
+            />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:text="Registrar nova corrida"
+            android:textColor="#183d72"
+            android:textSize="20sp" />
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pontoinicial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:ems="10"
+        android:hint="Insira o ponto inicial"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:boxBackgroundColor="#FAE3CD"
+        android:textColorHint="@color/black"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/custoviagem">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pontoinicialinput"
+            style="@style/Theme.Design.NoActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:inputType="textPersonName"
+            android:maxLength="50"
+            android:textColor="@color/white" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/custoviagem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Insira o custo da viagem"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="100dp"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:boxBackgroundColor="#FAE3CD"
+        android:textColorHint="@color/black"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+       >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/custoviageminput"
+            style="@style/Theme.Design.NoActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:inputType="textPersonName"
+            android:maxLength="50"
+            android:textColor="@color/white" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pontofinal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Insira o ponto final da viagem"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:inputType="text"
+        android:minHeight="48dp"
+        app:boxBackgroundColor="#FAE3CD"
+        android:textColorHint="@color/black"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/pontoinicial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pontofinalinput"
+            style="@style/Theme.Design.NoActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:inputType="textPersonName"
+            android:maxLength="50"
+            android:textColor="@color/white" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/button_registrar"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="match_parent"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:paddingVertical="10dp"
+        android:text="Finalizar"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#183d72"
+        android:textSize="16sp"
+        app:cornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pontofinal"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

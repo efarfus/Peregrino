@@ -25,6 +25,12 @@ class MainActivity : AppCompatActivity() {
         binding.buttonVeiculos.setOnClickListener {
             startActivity(Intent(this, VeiculosActivity::class.java))
         }
+        binding.buttonCorridas.setOnClickListener{
+            startActivity(Intent(this@MainActivity, RegistroDeCorridaActivity::class.java))
+        }
+        binding.buttonCalendario.setOnClickListener{
+            startActivity(Intent(this@MainActivity, CalendarioActivity::class.java))
+        }
     }
 
     private fun setupView() {
