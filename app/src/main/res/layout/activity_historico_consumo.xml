@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="#fff3e7"
-    tools:context=".OcorrenciasActivity">
+    android:layout_height="match_parent"
+    tools:context=".HistoricoConsumoActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_home"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="sans-serif-black"
-            android:text="Ocorrências"
+            android:text="Histórico de consumo"
             android:textColor="#183d72"
             android:textSize="20sp" />
 
@@ -45,42 +45,15 @@
             android:background="@drawable/baseline_person_outline_24" />
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/textData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text='24/06/2024'
-        android:textColor="#000000"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewOcorrencias"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:id="@+id/recyclerViewHistorico"
+        android:layout_width="409dp"
+        android:layout_height="665dp"
         android:layout_marginTop="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textData" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_home" />
 
-    <Button
-        android:id="@+id/button_registrar"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="match_parent"
-        android:layout_margin="20dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:text="Registrar ocorrência"
-        android:textAlignment="center"
-        android:textColor="#183d72"
-        android:textSize="20sp"
-        app:cornerRadius="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewOcorrencias"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

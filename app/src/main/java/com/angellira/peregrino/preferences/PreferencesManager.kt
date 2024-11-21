@@ -20,4 +20,22 @@ class Preferences(context: Context) {
             sharedPreferences.edit().putString("id", value).apply()
         }
 
+    var totalLitros: String?
+        get() = sharedPreferences.getString("totalLitros", null)
+        set(value) {
+            sharedPreferences.edit().putString("totalLitros", value).apply()
+        }
+
+    var litrosRestantes: String?
+        get() = sharedPreferences.getString("litrosRestantes", null)
+        set(value) {
+            sharedPreferences.edit().putString("litrosRestantes", value).apply()
+        }
+
+    var mediaFinal: String?
+        get() = sharedPreferences.getString("mediaFinal", null)
+        set(value) {
+            sharedPreferences.edit().putString("mediaFinal", value).apply()
+        }
+
 }

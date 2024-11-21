@@ -9,13 +9,27 @@ import androidx.core.view.WindowInsetsCompat
 import com.angellira.peregrino.databinding.ActivityCalculoPasso3Binding
 import com.angellira.peregrino.databinding.ActivityCalculoPasso4Binding
 import com.angellira.peregrino.databinding.ActivityCalculoResultadoBinding
+import com.angellira.reservafrotas.preferences.Preferences
+import java.text.DecimalFormat
 
 class CalculoResultadoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCalculoResultadoBinding
+    private val prefs by lazy { Preferences(this) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
+
+        val litrosConsumidos = prefs.totalLitros!!.toFloat() - prefs.litrosRestantes!!.toFloat()
+
+        val kmPorLitro = 80.0 / litrosConsumidos
+        val df = DecimalFormat("#.#") // Formata para uma casa decimal
+        val eficienciaFormatada = df.format(kmPorLitro)
+
+        // Salva a média calculada nas preferências
+        prefs.mediaFinal = eficienciaFormatada
+        binding.textView2.text = "${prefs.mediaFinal} km por litro"
 
         binding.buttonRegistrar.setOnClickListener {
             startActivity(Intent(this, ConsumoCombustivelActivity::class.java))

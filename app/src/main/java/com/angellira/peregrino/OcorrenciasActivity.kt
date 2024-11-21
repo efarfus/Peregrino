@@ -27,6 +27,13 @@ class OcorrenciasActivity : AppCompatActivity() {
         binding.buttonVolta.setOnClickListener {
             finish()
         }
+
+        binding.buttonRegistrar.setOnClickListener {
+            val editProfileDialog = EditProfileDialogOcorrenciasFragment()
+
+            // Exiba o DialogFragment
+            editProfileDialog.show(supportFragmentManager, "EditProfileDialogOcorrencias")
+        }
     }
 
     private fun recyclerView() {
