@@ -1,16 +1,19 @@
 package com.angellira.peregrino.network
 
+import retrofit2.Call
+import com.angellira.peregrino.model.Corrida
 import com.angellira.peregrino.model.User
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 
-private const val BASE_URL = "https://peregrino-abfa1-default-rtdb.firebaseio.com/"
-
+private const val BASE_URL = "https://peregrino-8435e-default-rtdb.firebaseio.com/"
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
@@ -20,7 +23,7 @@ interface ApiService {
     @GET("users.json")
     suspend fun getUsers(): List<User>
 
-    @GET("/users/login.json")
+    @GET("users/login.json")
     suspend fun getUserByEmailAndPassword(
         @retrofit2.http.Query("email") email: String,
         @retrofit2.http.Query("password") password: String
@@ -28,6 +31,12 @@ interface ApiService {
 
     @GET("users/{id}")
     suspend fun getUserById(@Path("id") id: String): User
+
+    @POST("Corrida.json")
+    fun registrarCorrida(@Body corrida: Corrida)
+
+    @GET("corridas/ultima")
+    fun obterUltimaCorrida(): Call<Corrida>
 
 }
 

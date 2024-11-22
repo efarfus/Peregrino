@@ -66,7 +66,7 @@
             android:layout_height="56dp"
             android:inputType="textPersonName"
             android:maxLength="50"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,9 +95,9 @@
             style="@style/Theme.Design.NoActionBar"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:maxLength="50"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -128,10 +128,9 @@
             android:layout_height="56dp"
             android:inputType="textPersonName"
             android:maxLength="50"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
     <Button
         android:id="@+id/button_registrar"
