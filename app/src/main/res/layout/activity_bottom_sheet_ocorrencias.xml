@@ -44,14 +44,13 @@
 
 
             <EditText
-                android:id="@+id/textEditCombustivel"
+                android:id="@+id/textEditDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="#00FFFFFF"
                 android:elevation="20dp"
                 android:ems="10"
-                android:hint="Combustível"
-                android:inputType="numberDecimal"
+                android:hint="Descriçao do gasto"
                 android:maxLength="30"
                 android:padding="8dp"
                 android:textColor="#000000"
@@ -63,94 +62,31 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <EditText
-                android:id="@+id/textEditManutencao"
+                android:id="@+id/textEditValor"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
                 android:layout_height="48dp"
                 android:background="#00FFFFFF"
                 android:elevation="20dp"
-                android:hint="Manutenção"
+                android:ems="10"
+                android:hint="Valor do gasto"
+                android:inputType="numberDecimal"
+                android:maxLength="30"
                 android:padding="8dp"
                 android:textColor="#000000"
-                android:maxLength="14"
-                android:ems="10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageOpen"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <EditText
-                android:id="@+id/textEditPneus"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:layout_height="48dp"
-                android:background="#00FFFFFF"
-                android:elevation="20dp"
-                android:hint="Pneus"
-                android:padding="8dp"
-                android:textColor="#000000"
-                android:maxLength="14"
-                android:ems="10"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
 
-            <EditText
-                android:id="@+id/textEditLimpeza"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="#00FFFFFF"
-                android:elevation="20dp"
-                android:ems="10"
-                android:hint="Limpeza"
-                android:inputType="numberDecimal"
-                android:maxLength="14"
-                android:padding="8dp"
-                android:textColor="#000000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <EditText
-                android:id="@+id/textEditGorjeta"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:layout_height="48dp"
-                android:background="#00FFFFFF"
-                android:elevation="20dp"
-                android:hint="Gorjeta"
-                android:padding="8dp"
-                android:textColor="#000000"
-                android:maxLength="14"
-                android:ems="10"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-            <EditText
-                android:id="@+id/textEditLucro"
-                android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:layout_height="48dp"
-                android:background="#00FFFFFF"
-                android:elevation="20dp"
-                android:hint="Lucro diário"
-                android:padding="8dp"
-                android:textColor="#000000"
-                android:maxLength="14"
-                android:ems="10"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
+            <Switch
+                android:id="@+id/valorPositivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="O valor é positivo?" />
 
             <Button
                 android:id="@+id/botaoconfirmaredicaoconta"

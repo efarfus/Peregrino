@@ -14,10 +14,12 @@ import androidx.fragment.app.DialogFragment
 import com.angellira.peregrino.databinding.ActivityBottomSheetOcorrenciasBinding
 import com.angellira.peregrino.databinding.ActivityOcorrenciasBinding
 import com.angellira.reservafrotas.preferences.Preferences
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class EditProfileDialogOcorrenciasFragment : DialogFragment() {
     private lateinit var binding: ActivityBottomSheetOcorrenciasBinding
-
     lateinit var preferencesManager: Preferences
 
     override fun onCreateView(
@@ -36,16 +38,13 @@ class EditProfileDialogOcorrenciasFragment : DialogFragment() {
         val buttonSave = view.findViewById<Button>(R.id.botaoconfirmaredicaoconta)
 
         binding.botaoconfirmaredicaoconta.setOnClickListener {
-            val combustivel = binding.textEditCombustivel.text.toString().trim()
-            val manutencao = binding.textEditManutencao.text.toString().trim()
-            val pneus = binding.textEditPneus.text.toString().trim()
-            val limpeza = binding.textEditLimpeza.text.toString().trim()
-            val gorjeta = binding.textEditGorjeta.text.toString().trim()
-            val lucro = binding.textEditLucro.text.toString().trim()
+            val descricao = binding.textEditDescricao.text.toString()
+            val valor = binding.textEditValor.text.toString().trim()
+            val valorPositivo = if (binding.valorPositivo.isChecked) true else false
+            val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            val carId = preferencesManager.idCarroSelected
 
-            if (combustivel.isEmpty() && manutencao.isEmpty() && pneus.isEmpty() &&
-                limpeza.isEmpty() && gorjeta.isEmpty() && lucro.isEmpty()
-            ) {
+            if (descricao.isEmpty() || valor.isEmpty()) {
                 Toast.makeText(requireContext(), "Preencha pelo menos um campo!", Toast.LENGTH_SHORT).show()
             } else {
                 // Realiza o registro
@@ -55,7 +54,6 @@ class EditProfileDialogOcorrenciasFragment : DialogFragment() {
         }
 
 
-        val options = listOf("Diantero esquerdo", "Diantero direito", "Traseiro esquerdo", "Traseiro direito")
 
 
     }

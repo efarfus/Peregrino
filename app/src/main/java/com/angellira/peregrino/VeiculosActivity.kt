@@ -33,7 +33,7 @@ class VeiculosActivity : AppCompatActivity() {
         }
 
         val cars = listOf(
-            Car("Foguetinho", "Gol GTI 1998"),
+            Car("Foguetinho", "Gol GTI 1998", "8974d275-a151-404f-8539-ff3a7677b966"),
             Car("Trovão Azul", "Uno Mille 2005"),
             Car("Relâmpago", "Civic 2010")
         )
@@ -114,6 +114,9 @@ class VeiculosActivity : AppCompatActivity() {
             val intent = Intent(this, EditarVeiculoActivity::class.java)
             intent.putExtra("CAR_NICKNAME", selectedCar.nickname)
             intent.putExtra("CAR_MODEL", selectedCar.model)
+            intent.putExtra("CAR_ID", selectedCar.id)
+
+
             startActivity(intent)
         }
 

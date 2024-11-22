@@ -38,4 +38,9 @@ class Preferences(context: Context) {
             sharedPreferences.edit().putString("mediaFinal", value).apply()
         }
 
+    var idCarroSelected: String?
+        get() = sharedPreferences.getString("idCarroSelected", null)
+        set(value) {
+            sharedPreferences.edit().putString("idCarroSelected", value).apply()
+        }
 }
