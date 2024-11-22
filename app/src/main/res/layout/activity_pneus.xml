@@ -114,9 +114,9 @@
         android:id="@+id/button_registrar"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
-        android:layout_margin="20dp"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
         android:paddingVertical="10dp"
         android:text="Cadastro de pneus"
         android:textAlignment="center"
@@ -125,7 +125,8 @@
         app:cornerRadius="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/picCarro"/>
+        app:layout_constraintTop_toBottomOf="@+id/picCarro" />
+
 
     <TextView
         android:id="@+id/qualPneu"
@@ -192,7 +193,6 @@
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ultimoEnchimento" />
-
 
 
 

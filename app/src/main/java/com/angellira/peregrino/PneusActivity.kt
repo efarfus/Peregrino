@@ -9,11 +9,16 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.angellira.peregrino.databinding.ActivityBottomSheetBinding
 import com.angellira.peregrino.databinding.ActivityPneusBinding
+import com.angellira.peregrino.model.Pneu
+import com.angellira.reservafrotas.preferences.Preferences
 
 class PneusActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPneusBinding
+    private val prefs by lazy { Preferences(this) }
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +73,31 @@ class PneusActivity : AppCompatActivity() {
         }
     }
 
+
+
+
+    private fun getPneusByCarId(carId: String): List<Pneu> {
+        return listOf(
+            Pneu().apply {
+                id = "1"
+                posicao = "Dianteiro Esquerdo"
+                fabricante = "Michelin"
+                aro = "16"
+                ultimoEnchimento = "2024-11-01"
+                ultimaTroca = "2024-10-01"
+            },
+            Pneu().apply {
+                id = "2"
+                posicao = "Traseiro Direito"
+                fabricante = "Goodyear"
+                aro = "15"
+                ultimoEnchimento = "2024-11-05"
+                ultimaTroca = "2024-09-15"
+            }
+        )
+    }
+
+
     private fun setupView() {
         enableEdgeToEdge()
         binding = ActivityPneusBinding.inflate(layoutInflater)
@@ -81,7 +111,22 @@ class PneusActivity : AppCompatActivity() {
     }
 
     private fun handleTireClick(tirePosition: String) {
-        // Exibe uma mensagem Toast com a posição do pneu clicado
-        Toast.makeText(this, "Pneu $tirePosition clicado", Toast.LENGTH_SHORT).show()
+        // Obtém o pneu correspondente à posição clicada
+        val pneu = getPneusByCarId(prefs.idCarroSelected.toString()).find { it.posicao == tirePosition }
+        if (pneu != null) {
+            // Atualiza as informações exibidas na tela com os dados do pneu clicado
+            binding.idPneu.text = "ID: ${pneu.id}"
+            binding.fabricante.text = "Fabricante: ${pneu.fabricante}"
+            binding.aro.text = "Aro: ${pneu.aro}"
+            binding.ultimoEnchimento.text = "Último enchimento: ${pneu.ultimoEnchimento}"
+            binding.ultimaTroca.text = "Última troca do pneu: ${pneu.ultimaTroca}"
+
+            Toast.makeText(this, "Pneu ${pneu.posicao} clicado!", Toast.LENGTH_SHORT).show()
+        } else {
+            // Caso não seja encontrado um pneu para a posição clicada
+            Toast.makeText(this, "Nenhum pneu encontrado para a posição: $tirePosition", Toast.LENGTH_SHORT).show()
+        }
     }
+
+
 }
