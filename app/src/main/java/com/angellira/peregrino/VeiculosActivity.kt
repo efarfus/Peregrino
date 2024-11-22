@@ -26,6 +26,12 @@ class VeiculosActivity : AppCompatActivity() {
             startActivity(Intent(this, PerfilActivity::class.java))
         }
 
+        binding.buttonAdd.setOnClickListener {
+            val EditProfileDialogVeiculos = EditProfileDialogVeiculosFragment()
+            // Exiba o DialogFragment
+            EditProfileDialogVeiculos.show(supportFragmentManager, "EditProfileDialogVeiculos")
+        }
+
         val cars = listOf(
             Car("Foguetinho", "Gol GTI 1998"),
             Car("Trovão Azul", "Uno Mille 2005"),
