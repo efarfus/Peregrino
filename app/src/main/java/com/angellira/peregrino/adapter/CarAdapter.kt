@@ -1,7 +1,5 @@
 package com.angellira.peregrino.adapter
 
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.angellira.peregrino.R
 import com.angellira.peregrino.model.Car
+import com.angellira.peregrino.model.Veiculo
 
 class CarAdapter(
-    private val cars: List<Car>, // Use uma classe Car em vez de apenas strings
-    private val onClick: (Car) -> Unit
+    private val cars: List<Veiculo>, // Agora, a lista de Veiculo é passada corretamente
+    private val onClick: (Veiculo) -> Unit
 ) : RecyclerView.Adapter<CarAdapter.CarViewHolder>() {
 
     inner class CarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,10 +20,10 @@ class CarAdapter(
         private val carNickname: TextView = itemView.findViewById(R.id.textApelido)
         private val carModel: TextView = itemView.findViewById(R.id.textCarModel)
 
-        fun bind(car: Car) {
-            carImage.setImageResource(R.drawable.carro) // Exemplo: `R.drawable.carro`
-            carNickname.text = car.nickname
-            carModel.text = car.model
+        fun bind(car: Veiculo) {
+            carImage.setImageResource(R.drawable.carro) // Exemplo: ícone do carro
+            carNickname.text = car.apelido  // Acessando o apelido do veículo
+            carModel.text = car.modelo      // Acessando o modelo do veículo
             itemView.setOnClickListener { onClick(car) }
         }
     }
@@ -39,5 +38,4 @@ class CarAdapter(
     }
 
     override fun getItemCount() = cars.size
-
 }

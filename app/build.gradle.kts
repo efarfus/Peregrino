@@ -50,7 +50,7 @@ dependencies {
     implementation (libs.kotlinx.serialization.json) // Biblioteca para kotlinx.serialization
     //noinspection GradleDependency
     implementation ("me.relex:circleindicator:2.1.6")
-
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation (libs.kotlinx.coroutines.core)
     implementation (libs.kotlinx.coroutines.android)
     implementation(libs.okhttp)

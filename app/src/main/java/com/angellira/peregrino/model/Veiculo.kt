@@ -8,6 +8,8 @@ class Veiculo {
     var enderecoAtual: String = ""
     var enderecoDestino: String = ""
     var gasto: String = ""
+    var apelido: String = ""
+    var modelo: String = ""
     var id: String = ""
     var lucro: String = ""
     var mediaVeiculo: String = ""

@@ -36,7 +36,7 @@ class EditProfileDialogFragment : DialogFragment() {
         }
 
 
-        val options = listOf("Diantero esquerdo", "Diantero direito", "Traseiro esquerdo", "Traseiro direito")
+        val options = listOf("Diantero Esquerdo", "Diantero Direito", "Traseiro Esquerdo", "Traseiro Direito")
 
         // Obtendo o Spinner
         val spinner: Spinner = view.findViewById<Spinner>(R.id.spinner)

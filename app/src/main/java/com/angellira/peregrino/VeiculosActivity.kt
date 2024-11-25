@@ -8,15 +8,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.angellira.peregrino.adapter.CarAdapter
 import com.angellira.peregrino.databinding.ActivityVeiculosBinding
-import com.angellira.peregrino.model.Car
+import com.angellira.peregrino.network.ApiServicePeregrino
+import kotlinx.coroutines.launch
 
 class VeiculosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityVeiculosBinding
+    private val serviceApi = ApiServicePeregrino.retrofitService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,98 +31,107 @@ class VeiculosActivity : AppCompatActivity() {
         }
 
         binding.buttonAdd.setOnClickListener {
-            val EditProfileDialogVeiculos = EditProfileDialogVeiculosFragment()
+            val editProfileDialogVeiculos = EditProfileDialogVeiculosFragment()
             // Exiba o DialogFragment
-            EditProfileDialogVeiculos.show(supportFragmentManager, "EditProfileDialogVeiculos")
+            editProfileDialogVeiculos.show(supportFragmentManager, "EditProfileDialogVeiculos")
         }
 
-        val cars = listOf(
-            Car("Foguetinho", "Gol GTI 1998", "8974d275-a151-404f-8539-ff3a7677b966"),
-            Car("Trovão Azul", "Uno Mille 2005"),
-            Car("Relâmpago", "Civic 2010")
-        )
+        lifecycleScope.launch {
+            try {
+                // Fazendo a requisição para obter a lista de carros
+                val cars = serviceApi.getCars().values.toList()
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewCars)
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = CarAdapter(cars) { selectedCar ->
-            Toast.makeText(this, "Selecionado: ${selectedCar.nickname} - ${selectedCar.model}", Toast.LENGTH_SHORT).show()
-        }
-        val snapHelper = PagerSnapHelper() // Alinha um item de cada vez
-        snapHelper.attachToRecyclerView(recyclerView)
+                val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewCars)
+                val layoutManager = LinearLayoutManager(this@VeiculosActivity, LinearLayoutManager.HORIZONTAL, false)
+                recyclerView.layoutManager = layoutManager
 
-        val activeColor = resources.getColor(R.color.indicator_active_color, theme) // Cor ativa
-        val inactiveColor = resources.getColor(R.color.indicator_inactive_color, theme) // Cor inativa
-
-        // Drawable para o indicador ativo
-        val activeDrawable = GradientDrawable().apply {
-            shape = GradientDrawable.OVAL
-            setColor(activeColor) // Cor ativa
-            setSize(20, 20) // Tamanho maior para ativo
-        }
-
-        // Drawable para o indicador inativo
-        val inactiveDrawable = GradientDrawable().apply {
-            shape = GradientDrawable.OVAL
-            setColor(inactiveColor) // Cor inativa
-            setSize(12, 12) // Tamanho menor para inativo
-        }
-
-        // Cria o indicador com base na quantidade de carros
-        binding.indicator.createIndicators(cars.size, 0)
-
-        // Adiciona o listener para sincronizar o indicador com o RecyclerView
-        binding.recyclerViewCars.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    val view = snapHelper.findSnapView(layoutManager)
-                    val position = layoutManager.getPosition(view!!)
-                    binding.indicator.animatePageSelected(position) // Atualiza a animação
+                // Criação do adapter e atribuição ao RecyclerView
+                val carAdapter = CarAdapter(cars) { selectedCar ->
+                    Toast.makeText(this@VeiculosActivity, "Selecionado: ${selectedCar.apelido} - ${selectedCar.modelo}", Toast.LENGTH_SHORT).show()
                 }
-            }
-        })
+                recyclerView.adapter = carAdapter
 
-        var currentPosition = 0
+                // Configuração do PagerSnapHelper para alinhar os itens de forma que apenas um item seja visível
+                val snapHelper = PagerSnapHelper()
+                snapHelper.attachToRecyclerView(recyclerView)
 
-        // Listener para monitorar o item selecionado
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) { // Parado após rolagem
-                    val view = snapHelper.findSnapView(layoutManager)
-                    view?.let {
-                        currentPosition = layoutManager.getPosition(it)
-                        val currentCar = cars[currentPosition]
-                        Toast.makeText(
-                            recyclerView.context,
-                            "Atual: ${currentCar.nickname} - ${currentCar.model}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                // Configuração do indicador (como dots)
+                val activeColor = resources.getColor(R.color.indicator_active_color, theme)
+                val inactiveColor = resources.getColor(R.color.indicator_inactive_color, theme)
+
+                val activeDrawable = GradientDrawable().apply {
+                    shape = GradientDrawable.OVAL
+                    setColor(activeColor)
+                    setSize(20, 20)
+                }
+
+                val inactiveDrawable = GradientDrawable().apply {
+                    shape = GradientDrawable.OVAL
+                    setColor(inactiveColor)
+                    setSize(12, 12)
+                }
+
+                // Cria os indicadores com base no tamanho da lista de carros
+                binding.indicator.createIndicators(cars.size, 0)
+
+                // Listener para sincronizar o indicador com o RecyclerView
+                binding.recyclerViewCars.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            val view = snapHelper.findSnapView(layoutManager)
+                            val position = layoutManager.getPosition(view!!)
+                            binding.indicator.animatePageSelected(position)
+                        }
                     }
+                })
+
+                // Definindo a variável currentPosition para saber qual item está sendo visualizado
+                var currentPosition = 0
+
+                // Listener para monitorar o item selecionado
+                recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+                        if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                            val view = snapHelper.findSnapView(layoutManager)
+                            view?.let {
+                                currentPosition = layoutManager.getPosition(it)
+                                val currentCar = cars[currentPosition]
+                                Toast.makeText(
+                                    recyclerView.context,
+                                    "Atual: ${currentCar.apelido} - ${currentCar.modelo}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                    }
+                })
+
+                // Ação do botão "Verificar" para entrar na edição do veículo
+                val buttonVerify = binding.buttonEdit
+                buttonVerify.setOnClickListener {
+                    val selectedCar = cars[currentPosition]
+                    Toast.makeText(
+                        this@VeiculosActivity,
+                        "Entrando no veículo: ${selectedCar.apelido} - ${selectedCar.modelo}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    // Abrindo uma nova Activity com os dados do carro
+                    val intent = Intent(this@VeiculosActivity, EditarVeiculoActivity::class.java)
+                    intent.putExtra("CAR_NICKNAME", selectedCar.apelido)
+                    intent.putExtra("CAR_MODEL", selectedCar.modelo)
+                    intent.putExtra("CAR_ID", selectedCar.id)
+
+                    startActivity(intent)
                 }
+            } catch (e: Exception) {
+                // Caso ocorra erro na requisição
+                Toast.makeText(this@VeiculosActivity, "Erro ao carregar dados: ${e.message}", Toast.LENGTH_SHORT).show()
             }
-        })
-
-        val buttonVerify = binding.buttonEdit
-        buttonVerify.setOnClickListener {
-            val selectedCar = cars[currentPosition]
-            Toast.makeText(
-                this,
-                "Entrando no veículo: ${selectedCar.nickname} - ${selectedCar.model}",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            // Aqui você pode abrir uma nova Activity ou realizar uma ação específica
-            val intent = Intent(this, EditarVeiculoActivity::class.java)
-            intent.putExtra("CAR_NICKNAME", selectedCar.nickname)
-            intent.putExtra("CAR_MODEL", selectedCar.model)
-            intent.putExtra("CAR_ID", selectedCar.id)
-
-
-            startActivity(intent)
         }
+
 
         binding.buttonVolta.setOnClickListener {
             finish()

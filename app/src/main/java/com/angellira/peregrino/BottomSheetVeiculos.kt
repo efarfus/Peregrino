@@ -1,6 +1,7 @@
 package com.angellira.peregrino
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,47 +13,77 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.angellira.peregrino.databinding.ActivityBottomSheetOcorrenciasBinding
 import com.angellira.peregrino.databinding.ActivityBottomSheetVeiculosBinding
+import com.angellira.peregrino.model.Veiculo
+import com.angellira.peregrino.network.ApiServicePeregrino
 import com.angellira.reservafrotas.preferences.Preferences
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.UUID
 
 class EditProfileDialogVeiculosFragment : DialogFragment() {
 
     private lateinit var binding: ActivityBottomSheetVeiculosBinding
-
+    private val serviceApi = ApiServicePeregrino.retrofitService
     lateinit var preferencesManager: Preferences
+    private val veiculo = Veiculo()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = ActivityBottomSheetVeiculosBinding.inflate(inflater, container, false)
         preferencesManager = Preferences(requireContext())
-        return inflater.inflate(R.layout.activity_bottom_sheet_veiculos, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = ActivityBottomSheetVeiculosBinding.inflate(layoutInflater)
 
 
-        val buttonSave = view.findViewById<Button>(R.id.botaoconfirmaredicaoconta)
 
         binding.botaoconfirmaredicaoconta.setOnClickListener {
             val apelido = binding.textEditApelido.text.toString()
             val modelo = binding.textEditModelo.text.toString()
+            veiculo.id = UUID.randomUUID().toString()
+            veiculo.modelo = modelo
+            veiculo.apelido = apelido
 
             if (apelido.isEmpty() || modelo.isEmpty()) {
                 Toast.makeText(requireContext(), "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
             } else {
-                // Realiza o registro
+
+                lifecycleScope.launch(IO) {
+                    try {
+                        val response = serviceApi.postVeiculos(veiculo)
+                        if (response.isSuccessful) {
+                            Log.d("burna", "Requisição bem-sucedida: ${response.body()}")
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Registro realizado com sucesso!", Toast.LENGTH_SHORT).show()
+                                dismiss()
+                            }
+                        } else {
+                            Log.e("burna", "Erro na requisição: ${response.code()} - ${response.message()}")
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), "Erro: ${response.message()}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        Log.e("burna", "Exceção na requisição: ${e.message}")
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(requireContext(), "Falha ao conectar com o servidor.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
                 Toast.makeText(requireContext(), "Registro realizado com sucesso!", Toast.LENGTH_SHORT).show()
-                // Adicione sua lógica de registro aqui
             }
         }
-
-
-        val options = listOf("Diantero esquerdo", "Diantero direito", "Traseiro esquerdo", "Traseiro direito")
-
 
     }
 

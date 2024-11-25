@@ -48,8 +48,8 @@ class OcorrenciasActivity : AppCompatActivity() {
 
         // Simulação de ocorrências do banco de dados
         val allOccurrences = listOf(
-            Ocorrencias("Troca de óleo", -337.52, isPositive = false, carId = "8974d275-a151-404f-8539-ff3a7677b966", date = "2024-11-22"),
-            Ocorrencias("Gorjeta", 351.40, isPositive = true, carId = "8974d275-a151-404f-8539-ff3a7677b966", date = "2024-11-22"),
+            Ocorrencias("Troca de óleo", -337.52, isPositive = false, carId = "8974d275-a151-404f-8539-ff3a7677b966", date = "2024-11-24"),
+            Ocorrencias("Gorjeta", 351.40, isPositive = true, carId = "8974d275-a151-404f-8539-ff3a7677b966", date = "2024-11-24"),
             Ocorrencias("Lavagem", -50.00, isPositive = false, carId = "8974d275-a151-404f-8539-ff3a7677b966", date = "2024-11-22"),
             Ocorrencias("Pneu furado", -200.00, isPositive = false, carId = "1", date = "2024-11-21")
         )
