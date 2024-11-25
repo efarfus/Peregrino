@@ -29,9 +29,9 @@ class EditarVeiculoActivity : AppCompatActivity() {
             startActivity(Intent(this, ConsumoCombustivelActivity::class.java))
         }
 
-        binding.buttonOcorrencias.setOnClickListener {
-            startActivity(Intent(this, OcorrenciasActivity::class.java))
-        }
+//        binding.buttonOcorrencias.setOnClickListener {
+//            startActivity(Intent(this, OcorrenciasActivity::class.java))
+//        }
 
         binding.buttonVolta.setOnClickListener {
             finish()

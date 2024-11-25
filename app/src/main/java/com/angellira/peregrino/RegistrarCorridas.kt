@@ -20,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
+import java.util.UUID
 
 class RegistrarCorridas : AppCompatActivity() {
 
@@ -29,7 +30,7 @@ class RegistrarCorridas : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        database = FirebaseDatabase.getInstance().reference // Referência ao Firebase
+        database = FirebaseDatabase.getInstance().reference
 
         setupView()
         binding.buttonVolta.setOnClickListener {
@@ -64,7 +65,7 @@ class RegistrarCorridas : AppCompatActivity() {
 
             if (isValid) {
                 val novaCorrida = Corrida(
-                    id = "",
+                    id = UUID.randomUUID().toString(),
                     custo = custos.text.toString(),
                     pontoInicial = pontoInicial.text.toString(),
                     pontoFinal = pontofinal.text.toString()

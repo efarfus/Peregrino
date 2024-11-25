@@ -1,7 +1,12 @@
 package com.angellira.peregrino.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Ocorrencias(
-    val description: String,
-    val value: Double,
-    val isPositive: Boolean // true para positivo (verde), false para negativo (vermelho)
+    var description: String = "",
+    var value: String = "",
+    var isPositive: Boolean = true,
+    var carId: String = "",
+    var date: String  = ""
 )

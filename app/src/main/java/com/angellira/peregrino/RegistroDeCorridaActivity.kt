@@ -2,27 +2,34 @@ package com.angellira.peregrino
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View.VISIBLE
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.angellira.peregrino.databinding.ActivityMainBinding
 import com.angellira.peregrino.databinding.ActivityRegistrarCorridasBinding
 import com.angellira.peregrino.databinding.ActivityRegistroDeCorridaBinding
 import com.angellira.peregrino.model.Corrida
+import com.angellira.peregrino.network.ApiServicePeregrino
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.launch
 
 class RegistroDeCorridaActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegistroDeCorridaBinding
     private lateinit var database: DatabaseReference
     private lateinit var nextCorridaTextView: TextView
+    private lateinit var nextpontofinal: TextView
+    private lateinit var nextvalor: TextView
+    private val corridasApi = ApiServicePeregrino.retrofitService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,35 +45,32 @@ class RegistroDeCorridaActivity : AppCompatActivity() {
         }
         database = FirebaseDatabase.getInstance().reference
         nextCorridaTextView = binding.nextCorrida
+        nextpontofinal = binding.nextPontofinal
+        nextvalor = binding.nextValor
         loadNextCorrida()
     }
 
     private fun loadNextCorrida() {
-        database.child("corridas").orderByKey().limitToLast(1)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        for (child in snapshot.children) {
-                            val corrida = child.getValue(Corrida::class.java)
-                            corrida?.let {
-                                nextCorridaTextView.text = """
-                                    Próxima Corrida:
-                                    ID: ${it.id}
-                                    Custo: ${it.custo}
-                                    Ponto Inicial: ${it.pontoInicial}
-                                    Ponto Final: ${it.pontoFinal}
-                                """.trimIndent()
-                            }
-                        }
-                    } else {
-                        nextCorridaTextView.text = "Nenhuma corrida cadastrada."
-                    }
-                }
+        lifecycleScope.launch {
+            try {
+                val corridasMap = corridasApi.obterCorridas()
 
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@RegistroDeCorridaActivity, "Erro ao carregar dados!", Toast.LENGTH_SHORT).show()
+                val ultimaCorrida = corridasMap.values.maxByOrNull { it.id }
+
+                if (ultimaCorrida != null) {
+                    nextCorridaTextView.text = "Ponto inicial: ${ultimaCorrida.pontoInicial}"
+                    nextpontofinal.text = "Ponto final: ${ultimaCorrida.pontoFinal}"
+                    binding.nextPontofinal.visibility = VISIBLE
+                    nextvalor.text = "Valor: ${ultimaCorrida.custo}"
+                    binding.nextValor.visibility = VISIBLE
+                } else {
+                    Toast.makeText(this@RegistroDeCorridaActivity, "Não há corridas disponíveis.", Toast.LENGTH_SHORT).show()
                 }
-            })
+            } catch (e: Exception) {
+                e.printStackTrace() // Log para debug
+                Toast.makeText(this@RegistroDeCorridaActivity, "Erro ao carregar corrida: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 
