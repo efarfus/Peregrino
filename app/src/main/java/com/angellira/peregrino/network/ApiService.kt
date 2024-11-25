@@ -1,7 +1,6 @@
 package com.angellira.peregrino.network
 
-import retrofit2.Call
-import com.angellira.peregrino.model.Corrida
+import com.angellira.peregrino.model.Ocorrencias
 import com.angellira.peregrino.model.User
 import com.angellira.peregrino.model.Veiculo
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -11,6 +10,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -44,6 +44,22 @@ interface ApiService {
 
     @GET("Veiculos.json")
     suspend fun getCars(): Map<String, Veiculo>
+
+    @POST("Ocorrencias.json")
+    suspend fun postOcorrencias(@Body ocorrencia: Ocorrencias): Response<Ocorrencias>
+
+    @GET("Ocorrencias.json")
+    suspend fun getOcorrencias(): Map<String, Ocorrencias>
+
+    @PATCH("Veiculos/{vehicleKey}.json")
+    suspend fun updateVehicle(
+        @Path("vehicleKey") vehicleKey: String,  // A chave do nó, obtida no passo anterior
+        @Body veiculo: Veiculo,                  // O veículo atualizado
+        newDate: String
+    )
+
+
+
 }
 
 object ApiServicePeregrino {

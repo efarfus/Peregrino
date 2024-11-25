@@ -86,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="O valor é positivo?" />
+                android:text="O valor é de lucro?" />
 
             <Button
                 android:id="@+id/botaoconfirmaredicaoconta"

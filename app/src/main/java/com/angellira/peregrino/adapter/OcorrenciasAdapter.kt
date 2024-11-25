@@ -12,8 +12,14 @@ import com.angellira.peregrino.model.Ocorrencias
 
 
 class OcorrenciasAdapter(
-    private val transactions: List<Ocorrencias>
+    private val transactions: MutableList<Ocorrencias>
 ) : RecyclerView.Adapter<OcorrenciasAdapter.TransactionViewHolder>() {
+
+    fun updateData(newData: List<Ocorrencias>) {
+        transactions.clear()
+        transactions.addAll(newData)
+        notifyDataSetChanged()
+    }
 
     inner class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val tvDescription: TextView = view.findViewById(R.id.tvDescription)
@@ -22,7 +28,7 @@ class OcorrenciasAdapter(
         fun bind(transaction: Ocorrencias) {
             tvDescription.text = transaction.description
 
-            val formattedValue = "R$ ${"%.2f".format(Math.abs(transaction.value))}"
+            val formattedValue = "R$ ${"%.2f".format(Math.abs(transaction.value.toFloat()))}"
             tvValue.text = if (transaction.isPositive) "+ $formattedValue" else "- $formattedValue"
 
             val valueColor = if (transaction.isPositive) android.R.color.holo_green_dark else android.R.color.holo_red_dark

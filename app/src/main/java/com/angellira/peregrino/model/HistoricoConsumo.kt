@@ -1,7 +1,10 @@
 package com.angellira.peregrino.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class HistoricoConsumo(
-    val id: String,
-    val data: String,
-    val eficiencia: String
+    var id: String,
+    var data: String,
+    var eficiencia: String
 )

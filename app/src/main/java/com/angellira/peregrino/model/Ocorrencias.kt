@@ -1,10 +1,13 @@
 package com.angellira.peregrino.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Ocorrencias(
-    val description: String,
-    val value: Double,
-    val isPositive: Boolean,
-    val carId: String, // Identificador do carro
-    val date: String // Data no formato "yyyy-MM-dd"
+    var description: String = "",
+    var value: String = "",
+    var isPositive: Boolean = true,
+    var carId: String = "", // Identificador do carro
+    var date: String  = ""// Data no formato "yyyy-MM-dd"
 )
 

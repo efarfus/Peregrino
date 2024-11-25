@@ -7,14 +7,23 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.angellira.peregrino.databinding.ActivityEditarVeiculoBinding
 import com.angellira.peregrino.databinding.ActivityMainBinding
 import com.angellira.peregrino.databinding.ActivityRelatoriosBinding
+import com.angellira.peregrino.model.Veiculo
+import com.angellira.peregrino.network.ApiServicePeregrino
 import com.angellira.reservafrotas.preferences.Preferences
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class EditarVeiculoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditarVeiculoBinding
     private val prefs by lazy { Preferences(this) }
+    private val serviceApi = ApiServicePeregrino.retrofitService
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +49,24 @@ class EditarVeiculoActivity : AppCompatActivity() {
             finish()
         }
 
-        val carNickname = intent.getStringExtra("CAR_NICKNAME")
-        val carModel = intent.getStringExtra("CAR_MODEL")
+
+
         prefs.idCarroSelected = intent.getStringExtra("CAR_ID")
 
-        binding.textApelidoCarro.text = carNickname
-        binding.textModeloCarro.text = carModel
-        Log.e("bruna", prefs.idCarroSelected.toString())
+        suspend fun getCarByInternalId(id: String): Veiculo? {
+            val response = serviceApi.getCars()
+            return response.values.find { it.id == id }
+        }
+
+        lifecycleScope.launch(IO){
+            val carro = getCarByInternalId(prefs.idCarroSelected.toString())
+
+            withContext(Main){
+                binding.textModeloCarro.text = carro!!.modelo
+                binding.textApelidoCarro.text = carro.apelido
+            }
+
+        }
     }
 
     private fun setupView() {
