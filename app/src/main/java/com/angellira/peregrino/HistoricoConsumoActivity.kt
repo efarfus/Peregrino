@@ -1,7 +1,9 @@
 package com.angellira.peregrino
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,25 +20,25 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
 
 class HistoricoConsumoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHistoricoConsumoBinding
     private lateinit var adapter: HistoricoConsumoAdapter
-    private lateinit var historicoList: MutableList<HistoricoConsumo>
-    private var historico = HistoricoConsumo("", "", "")
+    private lateinit var historicoList: List<HistoricoConsumo>
+    private var historico = HistoricoConsumo()
     private val serviceApi = ApiServicePeregrino.retrofitService
     private val prefs by lazy { Preferences(this) }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
         lifecycleScope.launch(IO){
 
             val carlist = getCarByInternalId(prefs.idCarroSelected.toString())
-            historico.id = carlist!!.id
-            historico.data = carlist.dataMediaFeita
-            historico.eficiencia = carlist.mediaVeiculo
+            historicoList = serviceApi.getMedias().values.filter { it.id == carlist?.id }
             withContext(Main){
                 recyclerView()
             }
@@ -51,9 +53,6 @@ class HistoricoConsumoActivity : AppCompatActivity() {
 
     private fun recyclerView() {
         binding.recyclerViewHistorico.layoutManager = LinearLayoutManager(this)
-
-
-
         adapter = HistoricoConsumoAdapter(historicoList)
         binding.recyclerViewHistorico.adapter = adapter
     }

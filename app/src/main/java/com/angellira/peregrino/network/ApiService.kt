@@ -1,5 +1,6 @@
 package com.angellira.peregrino.network
 
+import com.angellira.peregrino.model.HistoricoConsumo
 import com.angellira.peregrino.model.Ocorrencias
 import com.angellira.peregrino.model.User
 import com.angellira.peregrino.model.Veiculo
@@ -51,14 +52,17 @@ interface ApiService {
     @GET("Ocorrencias.json")
     suspend fun getOcorrencias(): Map<String, Ocorrencias>
 
-    @PATCH("Veiculos/{vehicleKey}.json")
+    @POST("Medias.json")
+    suspend fun postHistoricoConsumo(@Body historicoConsumo: HistoricoConsumo): Response<HistoricoConsumo>
+
+    @GET("Medias.json")
+    suspend fun getMedias(): Map<String, HistoricoConsumo>
+
+    @PATCH("Veiculos/{nodeId}.json")
     suspend fun updateVehicle(
-        @Path("vehicleKey") vehicleKey: String,  // A chave do nó, obtida no passo anterior
-        @Body veiculo: Veiculo,                  // O veículo atualizado
-        newDate: String
+        @Path("nodeId") nodeId: String, // ID do nó do Firebase
+        @Body updatedFields: Map<String, String> // Campos a serem atualizados
     )
-
-
 
 }
 

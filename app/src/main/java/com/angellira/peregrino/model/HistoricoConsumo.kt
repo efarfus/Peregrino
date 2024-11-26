@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class HistoricoConsumo(
-    var id: String,
-    var data: String,
-    var eficiencia: String
+    var id: String = "",
+    var data: String = "",
+    var eficiencia: String = ""
 )

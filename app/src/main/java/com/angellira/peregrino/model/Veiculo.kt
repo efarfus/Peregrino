@@ -13,6 +13,5 @@ data class Veiculo (
     var id: String = "",
     var lucro: String = "",
     var mediaVeiculo: String = "",
-    var dataMediaFeita: String = "",
     var valorCorrida: String = ""
 )
