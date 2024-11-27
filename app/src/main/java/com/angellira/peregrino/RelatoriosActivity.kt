@@ -54,9 +54,9 @@ class RelatoriosActivity : AppCompatActivity() {
                 val totalGeral = totalPositivo - totalNegativo + totalCorridas
 
 
-                binding.valorGastos.setText(totalNegativo.toString())
-                binding.valorPositivo.setText(totalPositivo.toString())
-                binding.geral.setText(totalGeral.toString())
+                binding.valorGastos.text = totalNegativo.toString()
+                binding.valorPositivo.text = totalPositivo.toString()
+                binding.geral.text = totalGeral.toString()
 
             } catch (e: Exception) {
                 Toast.makeText(this@RelatoriosActivity, "Erro", Toast.LENGTH_SHORT).show()
