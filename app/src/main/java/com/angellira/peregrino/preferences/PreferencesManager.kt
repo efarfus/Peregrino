@@ -43,4 +43,10 @@ class Preferences(context: Context) {
         set(value) {
             sharedPreferences.edit().putString("idCarroSelected", value).apply()
         }
+
+    var idCarroSelectedDelete: String?
+        get() = sharedPreferences.getString("idCarroSelectedDelete", null)
+        set(value) {
+            sharedPreferences.edit().putString("idCarroSelectedDelete", value).apply()
+        }
 }

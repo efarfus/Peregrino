@@ -3,6 +3,7 @@ package com.angellira.peregrino
 import android.content.Intent
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -15,12 +16,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.angellira.peregrino.adapter.CarAdapter
 import com.angellira.peregrino.databinding.ActivityVeiculosBinding
 import com.angellira.peregrino.network.ApiServicePeregrino
+import com.angellira.reservafrotas.preferences.Preferences
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class VeiculosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityVeiculosBinding
     private val serviceApi = ApiServicePeregrino.retrofitService
-
+    private val prefs by lazy { Preferences(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +104,7 @@ class VeiculosActivity : AppCompatActivity() {
                             view?.let {
                                 currentPosition = layoutManager.getPosition(it)
                                 val currentCar = cars[currentPosition]
+                                prefs.idCarroSelectedDelete = currentCar.id
                                 Toast.makeText(
                                     recyclerView.context,
                                     "Atual: ${currentCar.apelido} - ${currentCar.modelo}",
@@ -123,8 +130,44 @@ class VeiculosActivity : AppCompatActivity() {
                     intent.putExtra("CAR_NICKNAME", selectedCar.apelido)
                     intent.putExtra("CAR_MODEL", selectedCar.modelo)
                     intent.putExtra("CAR_ID", selectedCar.id)
-
                     startActivity(intent)
+                }
+
+                binding.buttonConsumptions.setOnClickListener {
+                    lifecycleScope.launch {
+                        try {
+                            // Suponha que você tenha o ID do veículo
+                            val vehicleId = "94677e88-6383-4df8-b679-1371c1c16e96"
+
+                            // Crie uma referência ao nó dos veículos
+                            val vehiclesRef = Firebase.database.getReference("Veiculos")
+
+                            // Procure pelo veículo que tenha o id correspondente
+                            val snapshot = vehiclesRef.orderByChild("id").equalTo(vehicleId).get().await()
+
+                            if (snapshot.exists()) {
+                                // O veículo foi encontrado, agora você pode pegar a chave do nó
+                                val vehicleNodeKey = snapshot.children.first().key
+                                if (vehicleNodeKey != null) {
+                                    try {
+                                        // Agora você tem a chave do nó, e pode fazer a requisição de exclusão
+                                        val deletedCar = serviceApi.deleteVeiculo(vehicleNodeKey)
+                                        Toast.makeText(this@VeiculosActivity, "Veículo deletado", Toast.LENGTH_SHORT).show()
+                                    } catch (e: Exception) {
+                                        // Caso ocorra erro ao deletar o veículo
+                                        Toast.makeText(this@VeiculosActivity, "Erro ao deletar o veículo: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                                } else {
+                                    Toast.makeText(this@VeiculosActivity, "Veículo não encontrado", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(this@VeiculosActivity, "Veículo não encontrado", Toast.LENGTH_SHORT).show()
+                            }
+                        } catch (e: Exception) {
+                            // Caso ocorra erro ao buscar dados no Firebase
+                            Toast.makeText(this@VeiculosActivity, "Erro ao carregar dados: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
             } catch (e: Exception) {
                 // Caso ocorra erro na requisição
@@ -136,6 +179,12 @@ class VeiculosActivity : AppCompatActivity() {
         binding.buttonVolta.setOnClickListener {
             finish()
         }
+
+
+
+
+
+
     }
 
     private fun setupView() {
