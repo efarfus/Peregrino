@@ -53,7 +53,6 @@ class VeiculosActivity : AppCompatActivity() {
 
                 // Criação do adapter e atribuição ao RecyclerView
                 val carAdapter = CarAdapter(cars) { selectedCar ->
-                    Toast.makeText(this@VeiculosActivity, "Selecionado: ${selectedCar.apelido} - ${selectedCar.modelo}", Toast.LENGTH_SHORT).show()
                 }
                 recyclerView.adapter = carAdapter
 
@@ -105,11 +104,6 @@ class VeiculosActivity : AppCompatActivity() {
                                 currentPosition = layoutManager.getPosition(it)
                                 val currentCar = cars[currentPosition]
                                 prefs.idCarroSelectedDelete = currentCar.id
-                                Toast.makeText(
-                                    recyclerView.context,
-                                    "Atual: ${currentCar.apelido} - ${currentCar.modelo}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
                             }
                         }
                     }
@@ -119,11 +113,6 @@ class VeiculosActivity : AppCompatActivity() {
                 val buttonVerify = binding.buttonEdit
                 buttonVerify.setOnClickListener {
                     val selectedCar = cars[currentPosition]
-                    Toast.makeText(
-                        this@VeiculosActivity,
-                        "Entrando no veículo: ${selectedCar.apelido} - ${selectedCar.modelo}",
-                        Toast.LENGTH_SHORT
-                    ).show()
 
                     // Abrindo uma nova Activity com os dados do carro
                     val intent = Intent(this@VeiculosActivity, EditarVeiculoActivity::class.java)

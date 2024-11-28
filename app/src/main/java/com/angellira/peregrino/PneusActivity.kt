@@ -9,16 +9,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.angellira.peregrino.databinding.ActivityBottomSheetBinding
+import androidx.lifecycle.lifecycleScope
 import com.angellira.peregrino.databinding.ActivityPneusBinding
 import com.angellira.peregrino.model.Pneu
+import com.angellira.peregrino.network.ApiServicePeregrino
 import com.angellira.reservafrotas.preferences.Preferences
+import kotlinx.coroutines.launch
 
 class PneusActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPneusBinding
     private val prefs by lazy { Preferences(this) }
-
+    private val serviceApi = ApiServicePeregrino.retrofitService
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,52 +50,39 @@ class PneusActivity : AppCompatActivity() {
 
                 when {
                     x < width / 2 && y < height / 2 -> {
-                        // Quadrante superior esquerdo (pneu dianteiro esquerdo)
                         handleTireClick("Dianteiro Esquerdo")
                     }
+
                     x >= width / 2 && y < height / 2 -> {
-                        // Quadrante superior direito (pneu dianteiro direito)
                         handleTireClick("Dianteiro Direito")
                     }
+
                     x < width / 2 && y >= height / 2 -> {
-                        // Quadrante inferior esquerdo (pneu traseiro esquerdo)
                         handleTireClick("Traseiro Esquerdo")
                     }
+
                     x >= width / 2 && y >= height / 2 -> {
-                        // Quadrante inferior direito (pneu traseiro direito)
                         handleTireClick("Traseiro Direito")
                     }
                 }
 
-                // Chame performClick para fins de acessibilidade
-                v.performClick()
+                v.performClick() // Acessibilidade
             }
             true
         }
+
     }
 
 
-
-
-    private fun getPneusByCarId(carId: String): List<Pneu> {
-        return listOf(
-            Pneu().apply {
-                id = "1"
-                posicao = "Dianteiro Esquerdo"
-                fabricante = "Michelin"
-                aro = "16"
-                ultimoEnchimento = "2024-11-01"
-                ultimaTroca = "2024-10-01"
-            },
-            Pneu().apply {
-                id = "2"
-                posicao = "Traseiro Direito"
-                fabricante = "Goodyear"
-                aro = "15"
-                ultimoEnchimento = "2024-11-05"
-                ultimaTroca = "2024-09-15"
-            }
-        )
+    private suspend fun getPneusByCarIdAndPosition(carId: String, position: String): Pneu? {
+        return try {
+            serviceApi.getPneus().values
+                .filter { it.carId == carId && it.posicao == position }
+                .maxByOrNull { it.timestamp } // Obtém o pneu com o maior timestamp
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        }
     }
 
 
@@ -110,21 +98,29 @@ class PneusActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun handleTireClick(tirePosition: String) {
-        // Obtém o pneu correspondente à posição clicada
-        val pneu = getPneusByCarId(prefs.idCarroSelected.toString()).find { it.posicao == tirePosition }
-        if (pneu != null) {
-            // Atualiza as informações exibidas na tela com os dados do pneu clicado
-            binding.idPneu.text = "ID: ${pneu.id}"
-            binding.fabricante.text = "Fabricante: ${pneu.fabricante}"
-            binding.aro.text = "Aro: ${pneu.aro}"
-            binding.ultimoEnchimento.text = "Último enchimento: ${pneu.ultimoEnchimento}"
-            binding.ultimaTroca.text = "Última troca do pneu: ${pneu.ultimaTroca}"
-
-            Toast.makeText(this, "Pneu ${pneu.posicao} clicado!", Toast.LENGTH_SHORT).show()
-        } else {
-            // Caso não seja encontrado um pneu para a posição clicada
-            Toast.makeText(this, "Nenhum pneu encontrado para a posição: $tirePosition", Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch {
+            val carId = prefs.idCarroSelected.toString() // Obtém o ID do carro selecionado
+            val pneu = getPneusByCarIdAndPosition(carId, tirePosition)
+            val carroSelecionado = serviceApi.getCars().values.find { it.id == carId }
+            if (pneu != null) {
+                // Atualiza as informações exibidas na tela com os dados do pneu clicado
+                binding.idPneu.text = "ID: ${pneu.id}"
+                binding.fabricante.text = "Fabricante: ${pneu.fabricante}"
+                binding.aro.text = "Aro: ${pneu.aro}"
+                binding.ultimoEnchimento.text = "Último enchimento: ${pneu.ultimoEnchimento}"
+                binding.ultimaTroca.text = "Última troca do pneu: ${pneu.ultimaTroca}"
+                binding.qualPneu.text =
+                    "Pneu do carro: ${carroSelecionado!!.apelido}, ${pneu.posicao}"
+            } else {
+                // Caso não seja encontrado um pneu para a posição clicada
+                Toast.makeText(
+                    this@PneusActivity,
+                    "Nenhum pneu encontrado para a posição: $tirePosition e carro ID: $carId",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

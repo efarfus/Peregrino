@@ -2,6 +2,7 @@ package com.angellira.peregrino.network
 
 import com.angellira.peregrino.model.HistoricoConsumo
 import com.angellira.peregrino.model.Ocorrencias
+import com.angellira.peregrino.model.Pneu
 import com.angellira.peregrino.model.User
 import com.angellira.peregrino.model.Veiculo
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -64,6 +65,12 @@ interface ApiService {
         @Path("nodeId") nodeId: String, // ID do nó do Firebase
         @Body updatedFields: Map<String, String> // Campos a serem atualizados
     )
+
+    @POST("Pneus.json")
+    suspend fun postPneus(@Body pneu: Pneu): Response<Pneu>
+
+    @GET("Pneus.json")
+    suspend fun getPneus(): Map<String, Pneu>
 
     @DELETE("Veiculos/{id}")
     suspend fun deleteVeiculo(@Path("id") id: String): Veiculo

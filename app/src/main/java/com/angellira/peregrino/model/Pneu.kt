@@ -3,13 +3,13 @@ package com.angellira.peregrino.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-class Pneu {
-    var ultimoEnchimento: String = ""
-    var ultimaTroca: String = ""
-    var fabricante: String = ""
-    var posicao: String = ""
-    var aro: String = ""
-    var id: String = ""
-    val carId: String = ""
-
-}
+data class Pneu(
+    var id: String = "",
+    var carId: String = "",
+    var posicao: String = "",
+    var fabricante: String = "",
+    var aro: String = "",
+    var ultimoEnchimento: String = "",
+    var ultimaTroca: String = "",
+    val timestamp: Long = System.currentTimeMillis() // Timestamp padrão
+)

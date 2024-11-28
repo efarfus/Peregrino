@@ -88,7 +88,7 @@
             <EditText
                 android:id="@+id/textEditEnchimento"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+                android:inputType="number|date"
                 android:layout_height="48dp"
                 android:background="#00FFFFFF"
                 android:elevation="20dp"
@@ -106,7 +106,7 @@
             <EditText
                 android:id="@+id/textEditTroca"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+                android:inputType="number|date"
                 android:layout_height="48dp"
                 android:background="#00FFFFFF"
                 android:elevation="20dp"
