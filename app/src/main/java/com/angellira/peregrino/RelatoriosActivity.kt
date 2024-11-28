@@ -2,6 +2,7 @@ package com.angellira.peregrino
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -38,32 +39,46 @@ class RelatoriosActivity : AppCompatActivity() {
 
                 var totalPositivo = 0.0
                 for (ocorrencia in ocorrenciaspositivas) {
-                    totalPositivo += ocorrencia.value.toDouble()
+                    totalPositivo += cleanCurrencyValue(ocorrencia.value)
                 }
 
                 var totalNegativo = 0.0
                 for (ocorrencia in ocorrenciasnegativas) {
-                    totalNegativo += ocorrencia.value.toDouble()
+                    totalNegativo += cleanCurrencyValue(ocorrencia.value)
                 }
 
                 var totalCorridas = 0.0
-                for (corridas in corridas) {
-                    totalCorridas += corridas.value.custo.toDouble()
+                for (corrida in corridas) {
+                    totalCorridas += cleanCurrencyValue(corrida.value.custo.toString())
                 }
 
                 val totalGeral = totalPositivo - totalNegativo + totalCorridas
 
-
-                binding.valorGastos.text = totalNegativo.toString()
-                binding.valorPositivo.text = totalPositivo.toString()
-                binding.geral.text = totalGeral.toString()
+                binding.valorGastos.text = ("R$ ${totalNegativo}")
+                binding.valorPositivo.text = ("R$ ${totalPositivo}")
+                binding.geral.text = ("R$ ${totalGeral}")
 
             } catch (e: Exception) {
-                Toast.makeText(this@RelatoriosActivity, "Erro", Toast.LENGTH_SHORT).show()
+                Log.d("Mostrar", "${e.message}")
+                Toast.makeText(this@RelatoriosActivity, "Erro ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    // Função para limpar e converter a string de moeda para número
+    private fun cleanCurrencyValue(value: String): Double {
+        // Remove o símbolo "R$", espaços e substitui a vírgula por ponto
+        val cleanedValue = value.replace("R$", "")
+            .replace("Â", "") // Remove qualquer caractere extra "Â"
+            .replace("\\s".toRegex(), "") // Remove espaços em branco
+            .replace(",", ".") // Substitui a vírgula por ponto para conversão correta
+
+        return try {
+            cleanedValue.toDouble() // Tenta converter a string para Double
+        } catch (e: NumberFormatException) {
+            0.0 // Retorna 0.0 em caso de erro
+        }
+    }
 
 
     private fun setupView() {

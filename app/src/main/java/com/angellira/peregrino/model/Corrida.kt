@@ -10,4 +10,5 @@ data class Corrida(
     val pontoInicial: String,
     val pontoFinal: String,
     val ativa: Boolean = true,
+    val data: String,
 )

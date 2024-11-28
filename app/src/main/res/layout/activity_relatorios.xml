@@ -59,6 +59,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Este cálculo é o somatório entre corridas \n e ocorrências."
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Indice de lucro no mês:"
             android:textSize="20sp"
             android:layout_marginTop="50dp"

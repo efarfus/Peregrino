@@ -74,7 +74,6 @@ interface ApiService {
     @GET("Pneus.json")
     suspend fun getPneus(): Map<String, Pneu>
 
-
     @POST("Corrida.json")
     suspend fun registrarCorrida(@Body corrida: Corrida)
 

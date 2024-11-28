@@ -17,8 +17,13 @@ import com.angellira.peregrino.model.Corrida
 import com.angellira.peregrino.network.ApiServicePeregrino
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
@@ -64,24 +69,32 @@ class RegistrarCorridas : AppCompatActivity() {
             }
 
             if (isValid) {
+
+                val currentDate = getCurrentDate()
+
+
                 val novaCorrida = Corrida(
                     id = UUID.randomUUID().toString(),
                     custo = custos.text.toString(),
                     pontoInicial = pontoInicial.text.toString(),
-                    pontoFinal = pontofinal.text.toString()
+                    pontoFinal = pontofinal.text.toString(),
+                    data = currentDate
                 )
 
-                lifecycleScope.launch {
+                lifecycleScope.launch(Dispatchers.IO){
                     try{
                     corridasApi.registrarCorrida(novaCorrida)
+                        withContext(Main){
                         Toast.makeText(
                             this@RegistrarCorridas,
                             "Corrida registrada com sucesso!",
                             Toast.LENGTH_SHORT
-                        ).show()
+                        ).show()}
                         startActivity(Intent(this@RegistrarCorridas, RegistroDeCorridaActivity::class.java))
                     } catch (e: Exception){
+                        withContext(Main){
                         Toast.makeText(this@RegistrarCorridas, "Erro ao registrar corrida", Toast.LENGTH_SHORT).show()
+                    }
                     }
                 }
             }
@@ -115,6 +128,11 @@ class RegistrarCorridas : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {}
         })
+    }
+
+    private fun getCurrentDate(): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return dateFormat.format(Date())
     }
 
 

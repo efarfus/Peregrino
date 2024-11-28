@@ -2,6 +2,7 @@ package com.angellira.peregrino
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View.VISIBLE
 import android.widget.TextView
 import android.widget.Toast
@@ -34,20 +35,20 @@ class RegistroDeCorridaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
-        binding.buttonVolta.setOnClickListener{
+        loadNextCorrida()
+        binding.buttonVolta.setOnClickListener {
             startActivity(Intent(this@RegistroDeCorridaActivity, MainActivity::class.java))
         }
-        binding.buttonCorridas.setOnClickListener{
+        binding.buttonCorridas.setOnClickListener {
             startActivity(Intent(this@RegistroDeCorridaActivity, RegistrarCorridas::class.java))
         }
-        binding.buttonRelatorios.setOnClickListener{
+        binding.buttonRelatorios.setOnClickListener {
             startActivity(Intent(this@RegistroDeCorridaActivity, RelatoriosActivity::class.java))
         }
         database = FirebaseDatabase.getInstance().reference
         nextCorridaTextView = binding.nextCorrida
         nextpontofinal = binding.nextPontofinal
         nextvalor = binding.nextValor
-        loadNextCorrida()
     }
 
     private fun loadNextCorrida() {
@@ -55,7 +56,9 @@ class RegistroDeCorridaActivity : AppCompatActivity() {
             try {
                 val corridasMap = corridasApi.obterCorridas()
 
-                val ultimaCorrida = corridasMap.values.maxByOrNull { it.id }
+                Log.d("RegistroDeCorridaActivity", "Corridas recebidas: $corridasMap")
+
+                val ultimaCorrida = corridasMap.values.maxByOrNull { it.data }
 
                 if (ultimaCorrida != null) {
                     nextCorridaTextView.text = "Ponto inicial: ${ultimaCorrida.pontoInicial}"
@@ -64,13 +67,23 @@ class RegistroDeCorridaActivity : AppCompatActivity() {
                     nextvalor.text = "Valor: ${ultimaCorrida.custo}"
                     binding.nextValor.visibility = VISIBLE
                 } else {
-                    Toast.makeText(this@RegistroDeCorridaActivity, "Não há corridas disponíveis.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@RegistroDeCorridaActivity,
+                        "Não há corridas disponíveis.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             } catch (e: Exception) {
-                e.printStackTrace() // Log para debug
-                Toast.makeText(this@RegistroDeCorridaActivity, "Erro ao carregar corrida: ${e.message}", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+                Log.d("Mostrar", "${e.message}")
+                Toast.makeText(
+                    this@RegistroDeCorridaActivity,
+                    "Erro ao carregar corrida: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
+
     }
 
 
