@@ -30,8 +30,8 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL).build()
 
 interface ApiService {
-    @GET("users.json")
-    suspend fun getUsers(): List<User>
+    @GET("User.json")
+    suspend fun getUsers(): Map<String, User>
 
     @GET("/users/login.json")
     suspend fun getUserByEmailAndPassword(

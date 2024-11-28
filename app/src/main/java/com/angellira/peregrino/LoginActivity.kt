@@ -2,6 +2,8 @@ package com.angellira.peregrino
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -27,33 +29,61 @@ class LoginActivity : AppCompatActivity() {
     private val prefs by lazy { Preferences(this) }
     private var users: MutableList<User> = mutableListOf()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupView()
-        val main = Intent(this, MainActivity::class.java)
 
+        val main = Intent(this, MainActivity::class.java)
         val cadastro = Intent(this, CadastroActivity::class.java)
+
         binding.buttonCadastrar.setOnClickListener {
             startActivity(cadastro)
         }
 
         binding.buttonEntrar.setOnClickListener {
-            startActivity(main)
             logar(binding.buttonEntrar, binding.labelTextCPF, binding.labelTextPass, main)
         }
-    }
 
-    private suspend fun checkCredentials(email: String, senha: String): Boolean {
-        return if (email.isNotEmpty() && senha.isNotEmpty()) {
-            try {
-                users = apiService.getUsers().toMutableList()
-                return users.any { it.email == email && it.senha == senha }
-            } catch (e: Exception) {
-                Log.e("errado", e.toString())
-                return false
+        binding.labelTextCPF.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence?, start: Int, count: Int, after: Int) {
+                // Não é necessário implementar este método para a máscara
             }
 
+            override fun onTextChanged(charSequence: CharSequence?, start: Int, before: Int, count: Int) {
+                // Remove o TextWatcher temporariamente para evitar loop infinito
+                binding.labelTextCPF.removeTextChangedListener(this)
+
+                val text = charSequence.toString().replace("[^\\d]".toRegex(), "") // Remove tudo que não é número
+
+                if (text.length <= 11) {
+                    // Adiciona a máscara de CPF
+                    val masked = text.replaceFirst(
+                        "(\\d{3})(\\d{3})(\\d{3})(\\d{2})".toRegex(),
+                        "$1.$2.$3-$4"
+                    )
+                    binding.labelTextCPF.setText(masked)
+                    binding.labelTextCPF.setSelection(masked.length) // Coloca o cursor no final
+                }
+
+                // Re-adiciona o TextWatcher
+                binding.labelTextCPF.addTextChangedListener(this)
+            }
+
+            override fun afterTextChanged(editable: Editable?) {
+                // Não é necessário implementar este método para a máscara
+            }
+        })
+    }
+
+    private suspend fun checkCredentials(CPF: String, senha: String): Boolean {
+        return if (CPF.isNotEmpty() && senha.isNotEmpty()) {
+            try {
+                users = apiService.getUsers().values.toMutableList()
+                users.any { it.CPF == CPF && it.senha == senha }
+            } catch (e: Exception) {
+                Log.e("LoginError", "Erro ao verificar as credenciais: ${e.message}")
+                false
+            }
         } else {
             false
         }
@@ -73,7 +103,6 @@ class LoginActivity : AppCompatActivity() {
         envioEmailSenha.setOnClickListener {
             val emailTentado = caixaEmail.text.toString()
             val senhaTentada = caixaSenha.text.toString()
-
 
             lifecycleScope.launch(IO) {
                 if (checkCredentials(emailTentado, senhaTentada)) {
@@ -95,7 +124,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
-
         }
     }
 
@@ -104,7 +132,7 @@ class LoginActivity : AppCompatActivity() {
             val userId = apiService.getUserByEmailAndPassword(email, password).id
             prefs.id = userId
         } catch (e: Exception) {
-            Log.e("errado", e.toString())
+            Log.e("SaveIdError", "Erro ao salvar ID: ${e.message}")
         }
     }
 
