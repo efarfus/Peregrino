@@ -1,12 +1,14 @@
 package com.angellira.peregrino
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.telecom.Call
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -23,6 +25,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.Date
 import java.util.Locale
 import java.util.UUID
@@ -33,6 +36,7 @@ class RegistrarCorridas : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private val corridasApi = ApiServicePeregrino.retrofitService
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         database = FirebaseDatabase.getInstance().reference
@@ -44,6 +48,7 @@ class RegistrarCorridas : AppCompatActivity() {
         logicaPrincipal()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun logicaPrincipal() {
         val custos = binding.custoviageminput
         val pontoInicial = binding.pontoinicialinput
@@ -70,7 +75,7 @@ class RegistrarCorridas : AppCompatActivity() {
 
             if (isValid) {
 
-                val currentDate = getCurrentDate()
+                val currentDate = LocalDateTime.now().toString()
 
 
                 val novaCorrida = Corrida(
