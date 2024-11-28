@@ -2,6 +2,7 @@ package com.angellira.peregrino
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,22 +26,33 @@ class PerfilActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launch {
-            val users = serviceApi.getUsers().values.find { it.id == prefs.id }
-            users?.let {
-                binding.nameInput.setText(it.name)
-                binding.emailInput.setText(it.email)
-                binding.cpfInput.setText(it.cpf)
-                binding.senhaInput.setText(it.senha)
-            } ?: run {
+            try {
+                val usersMap = serviceApi.getUsers()
+                Log.d("Perfil", "Usuários carregados: $usersMap")
+
+                val user = usersMap[prefs.id]
+                if (user != null) {
+                    Log.d("Perfil", "Usuário encontrado: ${user.name}")
+                    binding.nameInput.setText(user.name)
+                    binding.emailInput.setText(user.email)
+                    binding.cpfInput.setText(user.cpf)
+                    binding.senhaInput.setText(user.senha)
+                } else {
+                    Log.d("Perfil", "Usuário não encontrado com o ID: ${prefs.id}")
+                }
+            } catch (e: Exception) {
+                Log.e("Perfil", "Erro ao buscar usuário: $e")
             }
         }
+
+
+
 
         binding.buttonLogout.setOnClickListener {
             prefs.isLogged = false
             startActivity(Intent(this, SplashActivity::class.java))
             finishAffinity()
         }
-
 
 
     }

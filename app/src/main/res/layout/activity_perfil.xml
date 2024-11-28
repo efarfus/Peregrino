@@ -163,7 +163,6 @@
 
             android:ems="10"
             android:hint="Senha"
-            android:inputType="textPassword"
             android:minHeight="48dp"
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="#000000"
@@ -179,7 +178,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:enabled="false"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:maxLength="50"
                 android:textColor="@color/black" />
 

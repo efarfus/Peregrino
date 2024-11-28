@@ -1,20 +1,14 @@
 package com.angellira.peregrino.network
 
-import android.util.Log
+import com.angellira.peregrino.model.Corrida
 import com.angellira.peregrino.model.HistoricoConsumo
 import com.angellira.peregrino.model.Ocorrencias
 import com.angellira.peregrino.model.Pneu
-import com.angellira.peregrino.model.Corrida
 import com.angellira.peregrino.model.User
 import com.angellira.peregrino.model.Veiculo
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.Body
@@ -44,10 +38,10 @@ interface ApiService {
     suspend fun registrarUsuario(@Body user: User): Response<User>
 
 
-    @GET("users/login.json")
+    @GET("Users.json")
     suspend fun getUserByEmailAndPassword(
-        @retrofit2.http.Query("email") email: String,
-        @retrofit2.http.Query("password") password: String
+        @retrofit2.http.Query("cpf") cpf: String,
+        @retrofit2.http.Query("senha") senha: String
     ): User
 
     @GET("users/{id}")
@@ -92,7 +86,6 @@ interface ApiService {
 
     @DELETE("Veiculos/{id}")
     suspend fun deleteVeiculo(@Path("id") id: String): Response<Unit>
-
 
 
 }

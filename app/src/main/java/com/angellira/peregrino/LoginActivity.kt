@@ -106,8 +106,8 @@ class LoginActivity : AppCompatActivity() {
 
             lifecycleScope.launch(IO) {
                 if (checkCredentials(emailTentado, senhaTentada)) {
-                    // Espera o saveId ser concluído antes de continuar
                     saveId(emailTentado, senhaTentada)
+                    getUserByCredentials(emailTentado, senhaTentada)
                     withContext(Main) {
                         prefs.isLogged = true
                         startActivity(pagMain)
@@ -134,6 +134,15 @@ class LoginActivity : AppCompatActivity() {
             Log.e("SaveIdError", "Erro ao salvar ID: ${e.message}")
         }
     }
+
+    suspend fun getUserByCredentials(cpf: String, senha: String): Map.Entry<String, User>? {
+        val usersMap = apiService.getUsers() // Retorna o Map<String, User>
+        prefs.id = usersMap.entries.find {
+            it.value.cpf == cpf && it.value.senha == senha
+        }?.key ?: ""
+        return usersMap.entries.find { it.value.cpf  == cpf && it.value.senha == senha }
+    }
+
 
     private fun setupView() {
         enableEdgeToEdge()
