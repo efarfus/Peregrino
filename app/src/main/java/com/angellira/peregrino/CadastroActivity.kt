@@ -8,16 +8,24 @@ import android.text.TextWatcher
 import android.util.Patterns
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.angellira.peregrino.LoginActivity
-import com.angellira.peregrino.R
+import androidx.lifecycle.lifecycleScope
 import com.angellira.peregrino.databinding.ActivityCadastroBinding
+import com.angellira.peregrino.model.User
+import com.angellira.peregrino.network.ApiServicePeregrino
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.UUID
 
 class CadastroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCadastroBinding
+    private val corridasApi = ApiServicePeregrino.retrofitService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,55 +112,57 @@ class CadastroActivity : AppCompatActivity() {
 
         binding.errorConfirmPassword.visibility = GONE
 
-//        post()
+        post()
         return true
     }
 
-//    private fun post() {
-//        lifecycleScope.launch(IO) {
-//            try {
-//                val users = retrofitUser.getUsers()
-//                val existingUser = users.find { it.email == user.email }
-//
-//                if (existingUser != null) {
-//                    withContext(Main) {
-//                        Toast.makeText(
-//                            this@CadastroActivity,
-//                            "E-mail já cadastrado, tente usar outro.",
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//
-//                    }
-//                } else {
-//                    retrofitUser.saveUser(user)
-//
-//                    withContext(Main) {
-//                        Toast.makeText(
-//                            this@CadastroActivity,
-//                            "Usuário cadastrado com sucesso",
-//                            Toast.LENGTH_LONG
-//                        ).show()
-//                        binding.progressBar.visibility = GONE
-//                        binding.loadingOverlay.visibility = GONE
-//                        prefs.imageProfile = null
-//                        prefs.imageCnh = null
-//                        startActivity(Intent(this@CadastroActivity, LoginActivity::class.java))
-//                        finishAffinity()
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                withContext(Main) {
-//                    binding.progressBar.visibility = GONE
-//                    binding.loadingOverlay.visibility = GONE
-//                    Toast.makeText(
-//                        this@CadastroActivity,
-//                        "Ocorreu um erro, verifique sua conexão e tente novamente",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                }
-//            }
-//        }
-//    }
+    private fun post() {
+        lifecycleScope.launch(IO) {
+            try {
+                val users = corridasApi.getUsers()
+
+                val existingUser = users.find { it.email == binding.emailInput.text.toString() }
+
+                if (existingUser != null) {
+                    withContext(Main) {
+                        Toast.makeText(
+                            this@CadastroActivity,
+                            "E-mail já cadastrado, tente usar outro.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                } else {
+
+                    val newUser = User(
+                        id = UUID.randomUUID().toString(),
+                        name = binding.nameInput.text.toString(),
+                        email = binding.emailInput.text.toString(),
+                        senha = binding.passwordInput.text.toString()
+                    )
+
+                    corridasApi.registrarUsuario(newUser)
+
+                    withContext(Main) {
+                        Toast.makeText(
+                            this@CadastroActivity,
+                            "Usuário cadastrado com sucesso",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        startActivity(Intent(this@CadastroActivity, LoginActivity::class.java))
+                        finishAffinity()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Main) {
+                    Toast.makeText(
+                        this@CadastroActivity,
+                        "Ocorreu um erro, verifique sua conexão e tente novamente",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
+    }
 
     private fun maskCpf() {
         val cpfEditText = binding.cpfInput

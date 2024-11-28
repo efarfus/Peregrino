@@ -24,6 +24,9 @@ interface ApiService {
     @GET("users.json")
     suspend fun getUsers(): List<User>
 
+    @POST("users.json")
+    suspend fun registrarUsuario(@Body user: User): User
+
     @GET("users/login.json")
     suspend fun getUserByEmailAndPassword(
         @retrofit2.http.Query("email") email: String,
