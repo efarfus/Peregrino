@@ -1,6 +1,5 @@
 package com.angellira.peregrino.network
 
-import retrofit2.Call
 import com.angellira.peregrino.model.Corrida
 import com.angellira.peregrino.model.Ocorrencias
 import com.angellira.peregrino.model.User
@@ -22,10 +21,10 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiService {
     @GET("users.json")
-    suspend fun getUsers(): List<User>
+    suspend fun getUsers(): Map<String, User>
 
     @POST("users.json")
-    suspend fun registrarUsuario(@Body user: User): User
+    suspend fun registrarUsuario(@Body user: User): Map<String, String>
 
     @GET("users/login.json")
     suspend fun getUserByEmailAndPassword(

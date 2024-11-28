@@ -119,7 +119,7 @@ class CadastroActivity : AppCompatActivity() {
     private fun post() {
         lifecycleScope.launch(IO) {
             try {
-                val users = corridasApi.getUsers()
+                val users = corridasApi.getUsers().values.toList()
 
                 val existingUser = users.find { it.email == binding.emailInput.text.toString() }
 
@@ -137,7 +137,8 @@ class CadastroActivity : AppCompatActivity() {
                         id = UUID.randomUUID().toString(),
                         name = binding.nameInput.text.toString(),
                         email = binding.emailInput.text.toString(),
-                        senha = binding.passwordInput.text.toString()
+                        senha = binding.passwordInput.text.toString(),
+                        cpf = binding.cpfInput.text.toString()
                     )
 
                     corridasApi.registrarUsuario(newUser)
