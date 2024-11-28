@@ -21,6 +21,12 @@
             android:name=".HistoricoConsumoActivity"
             android:exported="false" />
         <activity
+            android:name=".CalendarioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarCorridas"
+            android:exported="false" />
+        <activity
             android:name=".CalculoResultadoActivity"
             android:exported="false" />
         <activity

@@ -3,6 +3,7 @@ package com.angellira.peregrino.network
 import com.angellira.peregrino.model.HistoricoConsumo
 import com.angellira.peregrino.model.Ocorrencias
 import com.angellira.peregrino.model.Pneu
+import com.angellira.peregrino.model.Corrida
 import com.angellira.peregrino.model.User
 import com.angellira.peregrino.model.Veiculo
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -30,10 +31,13 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL).build()
 
 interface ApiService {
-    @GET("User.json")
+    @GET("users.json")
     suspend fun getUsers(): Map<String, User>
 
-    @GET("/users/login.json")
+    @POST("users.json")
+    suspend fun registrarUsuario(@Body user: User): Map<String, String>
+
+    @GET("users/login.json")
     suspend fun getUserByEmailAndPassword(
         @retrofit2.http.Query("email") email: String,
         @retrofit2.http.Query("password") password: String
@@ -50,9 +54,6 @@ interface ApiService {
 
     @POST("Ocorrencias.json")
     suspend fun postOcorrencias(@Body ocorrencia: Ocorrencias): Response<Ocorrencias>
-
-    @GET("Ocorrencias.json")
-    suspend fun getOcorrencias(): Map<String, Ocorrencias>
 
     @POST("Medias.json")
     suspend fun postHistoricoConsumo(@Body historicoConsumo: HistoricoConsumo): Response<HistoricoConsumo>
@@ -75,6 +76,15 @@ interface ApiService {
     @DELETE("Veiculos/{id}")
     suspend fun deleteVeiculo(@Path("id") id: String): Veiculo
 
+
+    @POST("Corrida.json")
+    suspend fun registrarCorrida(@Body corrida: Corrida)
+
+    @GET("Corrida.json")
+    suspend fun obterCorridas(): Map<String, Corrida>
+
+    @GET("Ocorrencias.json")
+    suspend fun getOcorrencias(): Map<String, Ocorrencias>
 
 }
 

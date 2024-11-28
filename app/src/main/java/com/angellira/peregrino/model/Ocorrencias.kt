@@ -7,7 +7,6 @@ data class Ocorrencias(
     var description: String = "",
     var value: String = "",
     var isPositive: Boolean = true,
-    var carId: String = "", // Identificador do carro
-    var date: String  = ""// Data no formato "yyyy-MM-dd"
+    var carId: String = "",
+    var date: String  = ""
 )
-

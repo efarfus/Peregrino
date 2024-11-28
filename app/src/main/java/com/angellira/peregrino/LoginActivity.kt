@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.angellira.peregrino.databinding.ActivityLoginBinding
 import com.angellira.peregrino.model.User
 import com.angellira.peregrino.network.ApiServicePeregrino
-import com.angellira.peregrino.databinding.ActivityLoginBinding
 import com.angellira.reservafrotas.preferences.Preferences
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
