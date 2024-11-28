@@ -129,8 +129,7 @@ class LoginActivity : AppCompatActivity() {
 
     private suspend fun saveId(email: String, password: String) {
         try {
-            val userId = apiService.getUserByEmailAndPassword(email, password).id
-            prefs.id = userId
+            prefs.id = apiService.getUserByEmailAndPassword(email, password).id
         } catch (e: Exception) {
             Log.e("SaveIdError", "Erro ao salvar ID: ${e.message}")
         }

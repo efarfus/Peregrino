@@ -163,11 +163,14 @@
 
             android:ems="10"
             android:hint="Senha"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:minHeight="48dp"
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="#000000"
             app:boxBackgroundColor="#fff3e7"
+            app:endIconMode="password_toggle"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:drawableEnd="@drawable/eye"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -175,11 +178,10 @@
                 style="@style/Theme.Design.NoActionBar"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
+                android:enabled="false"
                 android:inputType="textPersonName"
                 android:maxLength="50"
-                android:enabled="false"
-                android:textColor="@color/black"
-                />
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

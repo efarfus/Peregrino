@@ -1,13 +1,12 @@
 package com.angellira.peregrino.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    val id: String = "",
-    val name: String,
-    val email: String,
-    val senha: String,
-    val cpf: String
+    var id: String = "",
+    var name: String = "",
+    var email: String = "",
+    var senha: String = "",
+    var cpf: String = ""
 )

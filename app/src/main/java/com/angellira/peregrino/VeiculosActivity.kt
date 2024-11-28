@@ -17,11 +17,9 @@ import com.angellira.peregrino.adapter.CarAdapter
 import com.angellira.peregrino.databinding.ActivityVeiculosBinding
 import com.angellira.peregrino.network.ApiServicePeregrino
 import com.angellira.reservafrotas.preferences.Preferences
-import com.google.firebase.Firebase
-import com.google.firebase.database.database
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class VeiculosActivity : AppCompatActivity() {
     private lateinit var binding: ActivityVeiculosBinding
@@ -48,7 +46,11 @@ class VeiculosActivity : AppCompatActivity() {
                 val cars = serviceApi.getCars().values.toList()
 
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewCars)
-                val layoutManager = LinearLayoutManager(this@VeiculosActivity, LinearLayoutManager.HORIZONTAL, false)
+                val layoutManager = LinearLayoutManager(
+                    this@VeiculosActivity,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
                 recyclerView.layoutManager = layoutManager
 
                 // Criação do adapter e atribuição ao RecyclerView
@@ -80,7 +82,8 @@ class VeiculosActivity : AppCompatActivity() {
                 binding.indicator.createIndicators(cars.size, 0)
 
                 // Listener para sincronizar o indicador com o RecyclerView
-                binding.recyclerViewCars.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                binding.recyclerViewCars.addOnScrollListener(object :
+                    RecyclerView.OnScrollListener() {
                     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                         super.onScrollStateChanged(recyclerView, newState)
                         if (newState == RecyclerView.SCROLL_STATE_IDLE) {
@@ -123,44 +126,75 @@ class VeiculosActivity : AppCompatActivity() {
                 }
 
                 binding.buttonConsumptions.setOnClickListener {
-                    lifecycleScope.launch {
+                    lifecycleScope.launch(Dispatchers.IO) {
                         try {
-                            // Suponha que você tenha o ID do veículo
-                            val vehicleId = "94677e88-6383-4df8-b679-1371c1c16e96"
+                            // Faz a chamada para buscar os veículos
+                            val veiculos = serviceApi.getCars()
 
-                            // Crie uma referência ao nó dos veículos
-                            val vehiclesRef = Firebase.database.getReference("Veiculos")
+                            // Encontrar o veículo com o id selecionado
+                            val carId = prefs.idCarroSelectedDelete
+                            val vehicleEntry = veiculos.entries.find { it.value.id == carId }
 
-                            // Procure pelo veículo que tenha o id correspondente
-                            val snapshot = vehiclesRef.orderByChild("id").equalTo(vehicleId).get().await()
+                            if (vehicleEntry != null) {
+                                val vehicleKey = vehicleEntry.key
 
-                            if (snapshot.exists()) {
-                                // O veículo foi encontrado, agora você pode pegar a chave do nó
-                                val vehicleNodeKey = snapshot.children.first().key
-                                if (vehicleNodeKey != null) {
-                                    try {
-                                        // Agora você tem a chave do nó, e pode fazer a requisição de exclusão
-                                        val deletedCar = serviceApi.deleteVeiculo(vehicleNodeKey)
-                                        Toast.makeText(this@VeiculosActivity, "Veículo deletado", Toast.LENGTH_SHORT).show()
-                                    } catch (e: Exception) {
-                                        // Caso ocorra erro ao deletar o veículo
-                                        Toast.makeText(this@VeiculosActivity, "Erro ao deletar o veículo: ${e.message}", Toast.LENGTH_SHORT).show()
+                                // Deleta o veículo, sem verificar o response diretamente
+                                val result = deleteVehicleSafely(vehicleKey)
+
+                                // Verificando o resultado da operação
+                                if (result.isSuccess) {
+                                    // Sucesso na deleção
+                                    withContext(Dispatchers.Main) {
+                                        Toast.makeText(
+                                            this@VeiculosActivity,
+                                            "Veículo deletado com sucesso",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
                                 } else {
-                                    Toast.makeText(this@VeiculosActivity, "Veículo não encontrado", Toast.LENGTH_SHORT).show()
+                                    // Se a deleção falhar
+                                    withContext(Dispatchers.Main) {
+                                        Toast.makeText(
+                                            this@VeiculosActivity,
+                                            "Erro ao deletar o veículo: ${result.exceptionOrNull()?.message}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                                 }
                             } else {
-                                Toast.makeText(this@VeiculosActivity, "Veículo não encontrado", Toast.LENGTH_SHORT).show()
+                                // Caso não encontre o veículo
+                                withContext(Dispatchers.Main) {
+                                    Toast.makeText(
+                                        this@VeiculosActivity,
+                                        "Nenhum veículo selecionado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
                         } catch (e: Exception) {
-                            // Caso ocorra erro ao buscar dados no Firebase
-                            Toast.makeText(this@VeiculosActivity, "Erro ao carregar dados: ${e.message}", Toast.LENGTH_SHORT).show()
+                            // Tratamento de erro para falha de comunicação
+                            withContext(Dispatchers.Main) {
+                                Log.e("deleter", "Erro: $e")
+                                Toast.makeText(
+                                    this@VeiculosActivity,
+                                    "Erro ao deletar veículo: ${e.message}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
+
+                    // Função para excluir o veículo com controle de exceção
+
+
                 }
             } catch (e: Exception) {
                 // Caso ocorra erro na requisição
-                Toast.makeText(this@VeiculosActivity, "Erro ao carregar dados: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@VeiculosActivity,
+                    "Erro ao carregar dados: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -168,12 +202,16 @@ class VeiculosActivity : AppCompatActivity() {
         binding.buttonVolta.setOnClickListener {
             finish()
         }
-
-
-
-
-
-
+    }
+    private suspend fun deleteVehicleSafely(vehicleKey: String): Result<Unit> {
+        return try {
+            // Faz a chamada para deletar o veículo
+            serviceApi.deleteVeiculo(vehicleKey)
+            Result.success(Unit)  // Sucesso
+        } catch (e: Exception) {
+            // Em caso de erro, retorna o erro
+            Result.failure(e)
+        }
     }
 
     private fun setupView() {

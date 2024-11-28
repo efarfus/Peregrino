@@ -1,14 +1,20 @@
 package com.angellira.peregrino.network
 
+import android.util.Log
 import com.angellira.peregrino.model.HistoricoConsumo
 import com.angellira.peregrino.model.Ocorrencias
 import com.angellira.peregrino.model.Pneu
 import com.angellira.peregrino.model.Corrida
 import com.angellira.peregrino.model.User
 import com.angellira.peregrino.model.Veiculo
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.Body
@@ -31,11 +37,12 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL).build()
 
 interface ApiService {
-    @GET("users.json")
+    @GET("Users.json")
     suspend fun getUsers(): Map<String, User>
 
-    @POST("users.json")
-    suspend fun registrarUsuario(@Body user: User): Map<String, String>
+    @POST("Users.json")
+    suspend fun registrarUsuario(@Body user: User): Response<User>
+
 
     @GET("users/login.json")
     suspend fun getUserByEmailAndPassword(
@@ -73,9 +80,6 @@ interface ApiService {
     @GET("Pneus.json")
     suspend fun getPneus(): Map<String, Pneu>
 
-    @DELETE("Veiculos/{id}")
-    suspend fun deleteVeiculo(@Path("id") id: String): Veiculo
-
 
     @POST("Corrida.json")
     suspend fun registrarCorrida(@Body corrida: Corrida)
@@ -85,6 +89,11 @@ interface ApiService {
 
     @GET("Ocorrencias.json")
     suspend fun getOcorrencias(): Map<String, Ocorrencias>
+
+    @DELETE("Veiculos/{id}")
+    suspend fun deleteVeiculo(@Path("id") id: String): Response<Unit>
+
+
 
 }
 

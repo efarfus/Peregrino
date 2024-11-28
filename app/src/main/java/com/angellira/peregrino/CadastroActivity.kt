@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -26,6 +27,7 @@ import java.util.UUID
 class CadastroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCadastroBinding
     private val corridasApi = ApiServicePeregrino.retrofitService
+    private val user = User()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class CadastroActivity : AppCompatActivity() {
         maskCpf()
         clickSingInButton()
 
-        binding.buttonVolta.setOnClickListener{
+        binding.buttonVolta.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
     }
@@ -45,10 +47,6 @@ class CadastroActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        //loadar
-//    }
 
     @SuppressLint("SetTextI18n")
     private fun validateFields(
@@ -120,8 +118,7 @@ class CadastroActivity : AppCompatActivity() {
         lifecycleScope.launch(IO) {
             try {
                 val users = corridasApi.getUsers().values.toList()
-
-                val existingUser = users.find { it.email == binding.emailInput.text.toString() }
+                val existingUser = users.find { it.cpf == binding.cpfInput.text.toString() }
 
                 if (existingUser != null) {
                     withContext(Main) {
@@ -133,37 +130,47 @@ class CadastroActivity : AppCompatActivity() {
                     }
                 } else {
 
-                    val newUser = User(
-                        id = UUID.randomUUID().toString(),
-                        name = binding.nameInput.text.toString(),
-                        email = binding.emailInput.text.toString(),
-                        senha = binding.passwordInput.text.toString(),
-                        cpf = binding.cpfInput.text.toString()
-                    )
+                    user.id = UUID.randomUUID().toString()
+                    user.name = binding.nameInput.text.toString()
+                    user.email = binding.emailInput.text.toString()
+                    user.senha = binding.passwordInput.text.toString()
+                    user.cpf = binding.cpfInput.text.toString()
 
-                    corridasApi.registrarUsuario(newUser)
+                    val response = corridasApi.registrarUsuario(user)
 
-                    withContext(Main) {
-                        Toast.makeText(
-                            this@CadastroActivity,
-                            "Usuário cadastrado com sucesso",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        startActivity(Intent(this@CadastroActivity, LoginActivity::class.java))
-                        finishAffinity()
+                    if (response.isSuccessful) {
+                        withContext(Main) {
+                            Toast.makeText(
+                                this@CadastroActivity,
+                                "Usuário cadastrado com sucesso",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            startActivity(Intent(this@CadastroActivity, LoginActivity::class.java))
+                            finishAffinity()
+                        }
+                    } else {
+                        withContext(Main) {
+                            Toast.makeText(
+                                this@CadastroActivity,
+                                "Erro ao cadastrar usuário: ${response.errorBody()?.string()}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
                 }
             } catch (e: Exception) {
                 withContext(Main) {
                     Toast.makeText(
                         this@CadastroActivity,
-                        "Ocorreu um erro, verifique sua conexão e tente novamente",
+                        "Erro ao cadastrar usuário: ${e.message}",
                         Toast.LENGTH_LONG
                     ).show()
+                    Log.e("Cadastro", "Erro: $e")
                 }
             }
         }
     }
+
 
     private fun maskCpf() {
         val cpfEditText = binding.cpfInput
