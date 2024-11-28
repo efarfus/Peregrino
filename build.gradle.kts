@@ -4,6 +4,5 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0" // Especifique a versão do plugin
     id("com.google.gms.google-services") version "4.4.2" apply false
-    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin) apply false
 
 }

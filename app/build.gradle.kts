@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id ("kotlinx-serialization") // Plugin para kotlinx.serialization, caso esteja usando
     id("com.google.gms.google-services")
-    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
+    id ("kotlin-kapt")
+
 }
 
 android {
@@ -65,11 +66,11 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.ui.android)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.firebase.common.ktx)
-    implementation(libs.firebase.database.ktx)
-    implementation(libs.play.services.maps)
-    implementation(libs.firebase.database.ktx)
+    implementation ("androidx.room:room-ktx:2.5.2")
+    kapt ("androidx.room:room-compiler:2.6.1") // Adicione se usar anotações do Room
+    implementation ("com.google.firebase:firebase-common-ktx")
+    implementation ("com.google.firebase:firebase-database-ktx")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

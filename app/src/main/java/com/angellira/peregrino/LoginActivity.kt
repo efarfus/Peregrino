@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 val text = charSequence.toString().replace("[^\\d]".toRegex(), "") // Remove tudo que não é número
 
                 if (text.length <= 11) {
-                    // Adiciona a máscara de CPF
+                    // Adiciona a máscara de cpf
                     val masked = text.replaceFirst(
                         "(\\d{3})(\\d{3})(\\d{3})(\\d{2})".toRegex(),
                         "$1.$2.$3-$4"
@@ -75,11 +75,11 @@ class LoginActivity : AppCompatActivity() {
         })
     }
 
-    private suspend fun checkCredentials(CPF: String, senha: String): Boolean {
-        return if (CPF.isNotEmpty() && senha.isNotEmpty()) {
+    private suspend fun checkCredentials(cpf: String, senha: String): Boolean {
+        return if (cpf.isNotEmpty() && senha.isNotEmpty()) {
             try {
                 users = apiService.getUsers().values.toMutableList()
-                users.any { it.CPF == CPF && it.senha == senha }
+                users.any { it.cpf == cpf && it.senha == senha }
             } catch (e: Exception) {
                 Log.e("LoginError", "Erro ao verificar as credenciais: ${e.message}")
                 false
